@@ -12,18 +12,25 @@ div {
   text-align: center;
 }
 
-#wrapper {
+/* #wrapper {
+  position
   margin-left: 50%;
   margin-right: auto;
   transform: translate(-33%, 0);
+} */
+
+iframe {
+  display: block;
+  margin: 0 auto;
 }
 
 .quiz {
   position: absolute;
-  left: 0px;
-  top: 0px;
-  height: 350px;
-  width: 630px;
+  left: 50%;
+  top: 80px;
+  height: 380px;
+  width: 640px;
+  margin-left: -320px;
   padding: 10px;
   background-color: aliceblue;
   /* display: none; */

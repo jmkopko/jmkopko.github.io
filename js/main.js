@@ -75,6 +75,7 @@ function onProgress(currentTime) {
     $("#feedback_wrong3").hide();
     $("#feedback_noinput3").hide();
     $("#qb3").hide();
+    $("#check3").show();
   }
 }
 
