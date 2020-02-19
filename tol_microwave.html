@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>How a Hair Dryer Works</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Lobster|Merriweather"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  </head>
+
+  <body>
+    <div><h1>How Hair Drying Works</h1></div>
+    <div id="wrapper">
+      <div id="player"></div>
+      <div id="start" class="quiz">
+        Let's begin by imagining a scenario. <br />
+        <button id="startbutton" class="quizbutton">
+          Let's Begin!
+        </button>
+      </div>
+      <div id="quiz1" class="quiz">
+        <h2>
+          Is it safe for you to use a hair dryer when you are in a bath tub?
+        </h2>
+        <div id="qc1" class="quiz-choice">
+          <input type="radio" id="y1" name="q1" value="yes" />
+          <label for="y1">Yes</label><br />
+          <input type="radio" id="n1" name="q1" value="no" />
+          <label for="n1">No</label><br />
+        </div>
+        <button id="check1" class="quizbutton">
+          Check your answer
+        </button>
+        <button id="hint1" class="quizbutton">
+          Get a Hint
+        </button>
+        <br />
+        <div id="feedback_noinput1">Please choose either yes or no</div>
+        <br />
+        <div id="feedback_right1">Correct! Click to learn more</div>
+        <div id="feedback_wrong1">Not quite - Click to learn more</div>
+
+        <button id="qb1">Continue</button>
+      </div>
+
+      <div id="quiz2" class="quiz">
+        <h2>
+          Choose an option below regarding blow drying and air-drying.
+        </h2>
+        <div id="qc2" class="quiz-choice">
+          <input type="radio" id="y2" name="q2" value="yes" />
+          <label for="y2">Natural air drying is best for your hair.</label
+          ><br />
+          <input type="radio" id="n2" name="q2" value="no" />
+          <label for="n2">Blow drying is not good for your hair.</label><br />
+        </div>
+        <div id="feedback_noinput2">
+          Please choose one of the options above.
+        </div>
+        <button id="check2" class="quizbutton">
+          Check your answer
+        </button>
+        <br />
+        <div id="feedback_wrong2">Not quite - Click to learn more</div>
+
+        <button id="qb2">Continue</button>
+      </div>
+
+      <div id="quiz3" class="quiz">
+        <h2>
+          Now you know how a hair drier works, choose one of the option below:
+        </h2>
+        <div id="qc3" class="quiz-choice">
+          <input type="radio" id="n31" name="q3" value="no" />
+          <label for="n31"
+            >Higher temperature is better as more heat leads to better and quick
+            drying.</label
+          ><br />
+          <input type="radio" id="n32" name="q3" value="no" />
+          <label for="n32">High temperature leads to shinier hair.</label>
+          <br />
+          <input type="radio" id="y3" name="q3" value="yes" />
+          <label for="y3">None of the above options are right.</label><br />
+        </div>
+        <button id="check3" class="quizbutton">
+          Check your answer
+        </button>
+        <br />
+        <div id="feedback_noinput3">
+          Please choose one of the options above
+        </div>
+        <br />
+        <div id="feedback_right3">Yes, you are right!</div>
+        <div id="feedback_wrong3">You are not quite right</div>
+        <button id="qb3">Rewatch Segment</button>
+      </div>
+    </div>
+  </body>
+</html>
