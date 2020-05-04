@@ -1,0 +1,60 @@
+div {
+  font-family: Microsoft Yahei;
+
+  /* margin-left: 450px; */
+}
+
+h1 {
+  text-align: center;
+}
+
+#sign {
+  width: 800px;
+  margin-left: 30px;
+}
+
+#quiz_content {
+  width: 800px;
+}
+
+.button {
+  display: block;
+  background-color: #689;
+  width: 250px;
+  height: 30px;
+  color: white;
+  font-weight: bold;
+  margin: auto;
+  text-align: center;
+}
+
+.quizq {
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+
+.quiz1,
+.quiz2 {
+  font-weight: lighter;
+  padding-left: 30px;
+  padding-top: 20px;
+}
+
+.quizradio1,
+.quizradio2 {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.feedback {
+  font-weight: bold;
+  text-align: center;
+}
+
+.correct {
+  color: greenyellow;
+}
+
+.incorrect {
+  color: crimson;
+}

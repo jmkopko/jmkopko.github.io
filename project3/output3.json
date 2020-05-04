@@ -1,0 +1,870 @@
+data = {
+  "4correct": [
+    [
+      "No, this was stated in the lecture that Jigsaw is a black box in terms of showing the theory of intelligence",
+      4,
+      1.0,
+      "C",
+      8.25,
+      7.2,
+      "correct"
+    ],
+    [
+      "No, jigsaw doesn't help build a theory of intelligence.",
+      4,
+      1.0,
+      "C",
+      8.0,
+      7.6,
+      "correct"
+    ],
+    [
+      "Probably not (though it's not impossible). Jigsaw is mostly focused around empathy and interpersonal skills. It does not explicitly teach learners how brains and learning works, which is usually needed to convert students to growth mindsets. Rather, it teaches students that they can work with many different kinds of people, and achieve more than they previously thought (though it doesn't teach them why they can do these things)",
+      4,
+      1.0,
+      "C",
+      7.75,
+      7.5,
+      "correct"
+    ],
+    [
+      "Not really, jigsaw does not help students understand the brain or intelligence which is a prerequisite for a growth mindset.",
+      4,
+      1.0,
+      "C",
+      9.5,
+      8.2,
+      "correct"
+    ],
+    [
+      "No, because it doesn\u2019t implicate how the brain works, and the malleable nature of intelligence",
+      4,
+      1.0,
+      "C",
+      8.5,
+      7.3,
+      "correct"
+    ],
+    [
+      "No",
+      4,
+      1.0,
+      "C",
+      8.75,
+      7.8,
+      "correct"
+    ],
+    [
+      "Since the Jigsaw method does not reveal the details of how it is effective, we cannot assess if it actually creates a growth-intelligence mindset as it could also be attributed to a talent in that given domain that was not previously exposed. It could create a growth-intelligence mindset, but it's not a guarantee. Hence, my answer is no.",
+      4,
+      1.0,
+      "C",
+      7.75,
+      7.1,
+      "correct"
+    ],
+    [
+      "No, because usually, students don't realize why it works",
+      4,
+      1.0,
+      "C",
+      7.75,
+      7.3,
+      "correct"
+    ],
+    [
+      "I would say no, because growth mindset is an idea that through struggling one can do better and Jigsaw does not really do this. Moreover, students usually misunderstand even why jigsaw works.",
+      4,
+      1.0,
+      "C",
+      8.75,
+      8.1,
+      "correct"
+    ],
+    [
+      "No, because it doesn\u2019t implicate how the brain works, and the malleable nature of intelligence. Jigsaw doesn't help students or teachers discover why it works, It doesn't help intelligence either.",
+      4,
+      1.0,
+      "C",
+      9.75,
+      8.3,
+      "correct"
+    ],
+    [
+      "No, it does not help with the intelligence theory.",
+      4,
+      1.0,
+      "C",
+      8.0,
+      7.6,
+      "correct"
+    ],
+    [
+      "No. Though it teaches the konwlegde in a better way, it does not share any knowledge about mindsets, nor the malleable nature of intelligence.",
+      4,
+      1.0,
+      "C",
+      8.0,
+      6.7,
+      "correct"
+    ],
+    [
+      "Jigsaw is about collaborative learning and empathy, but not actually about growth mindset.",
+      4,
+      1.0,
+      "C",
+      10.0,
+      6.7,
+      "correct"
+    ]
+  ],
+  "4incorrect": [
+    [
+      "It doesn't show the students that they can grow their skill set by working on them, by practicing them.",
+      4,
+      1.0,
+      "C",
+      6.75,
+      6.4,
+      "incorrect"
+    ],
+    [
+      "I think so. Because Jigsaw demonstrates to students that they can always learn from other people. What's more, it shows that they can not only learn themselves, but also help other people to improve together.",
+      4,
+      0.0,
+      "A",
+      7.25,
+      7.7,
+      "incorrect"
+    ],
+    [
+      "Yes, because it gives them the confidence that they can master a concept enough to teach others and help others do well when tested on that concept.",
+      4,
+      0.0,
+      "A",
+      8.0,
+      7.0,
+      "incorrect"
+    ],
+    [
+      "Yes indeed! The jigsaw method creates a growth mindset because through the process students are going through walks them through a process in which their own competence is demonstrated back to them and they are supported by the other students on their team. This translates to them feeling their own ability to succeed and increase their intelligence in the future.",
+      4,
+      0.0,
+      "A",
+      7.5,
+      8.1,
+      "incorrect"
+    ],
+    [
+      "Yes, students are encouraged to learn , express, they are seeing others rely on themselves and see themselves improve.",
+      4,
+      0.0,
+      "B",
+      8.0,
+      8.0,
+      "incorrect"
+    ],
+    [
+      "I think it does. Especially for those low-achieving students, Jigsaw enables them to learn from other members (in the expert group as well as Jigsaw group), knowing that they could also learn as well as their peers. Also, as Jigsaw team will rely on one another to learn that part of knowledge, each person will feel that they are making contributions.",
+      4,
+      0.0,
+      "A",
+      7.0,
+      6.8,
+      "incorrect"
+    ],
+    [
+      "Yes, because the Jigsaw methods let even the low-achieving students become expert and help other students. These students will feel they could also achieve better score if they work hard.",
+      4,
+      0.0,
+      "A",
+      6.0,
+      7.0,
+      "incorrect"
+    ],
+    [
+      "Yes, for example carlos, have developed a growth-mindset, while he thought he was stupid he later think he is smart.",
+      4,
+      0.0,
+      "A",
+      6.5,
+      7.7,
+      "incorrect"
+    ],
+    [
+      "According to the reading, Carlos changed his mindset because his groupmates think he was someone they could work with and someone they could appreciate.",
+      4,
+      0.0,
+      "B",
+      7.75,
+      6.9,
+      "incorrect"
+    ]
+  ],
+  "1correct": [
+    [
+      "Rajeev needs expert feedback in order to identify his mistakes and how to correct them.",
+      1,
+      1.0,
+      "A",
+      8.0,
+      7.5,
+      "correct"
+    ],
+    [
+      "Rajeev is getting a lot of practice, but he should ask an art instructor each day for feedback on how well he drew the day\u2019s portrait",
+      1,
+      1.0,
+      "A",
+      8.0,
+      6.8,
+      "correct"
+    ],
+    [
+      "Currently, Rajeev is not receiving feedback and remedial instruction for his work which are an integral part of deliberate practice.",
+      1,
+      1.0,
+      "A",
+      8.75,
+      8.2,
+      "correct"
+    ],
+    [
+      "He is not doing deliberate practice. That is, his practice might not be focused on the part that needs improvement, there is no feedback on his performance from experts.",
+      1,
+      1.0,
+      "A",
+      8.0,
+      7.3,
+      "correct"
+    ],
+    [
+      "Because he doesn't have a mentor who diagnoses his problems about painting. He doesn't get immediate feedback and remedial training.",
+      1,
+      1.0,
+      "A",
+      8.75,
+      7.7,
+      "correct"
+    ],
+    [
+      "Rajiv may not know the optimal techniques for drawing because of a lack of explicit instruction, he has no supervision in terms of mistakes that he's making and he gets no feedback or remedial training for the components he's weak at.",
+      1,
+      1.0,
+      "A",
+      8.0,
+      7.1,
+      "correct"
+    ],
+    [
+      "Rajeev is not improving because he is not undergoing deliberate practice. He is drawing alone, which means that one of the conditions of deliberate practice is not being met: he is not being supervised by a teacher to diagnose errors.",
+      1,
+      1.0,
+      "A",
+      8.0,
+      8.1,
+      "correct"
+    ],
+    [
+      "Because he is neither given explicit instruction about the best method, nor supervised by a teacher to diagnose errors and get informative feedback and remedial training. Repeated practice at the same level won't lead to performance.",
+      1,
+      1.0,
+      "A",
+      7.75,
+      6.8,
+      "correct"
+    ],
+    [
+      "He is not doing deliberate practice. B/c there is no feedback provided.",
+      1,
+      1.0,
+      "A",
+      10.0,
+      8.3,
+      "correct"
+    ],
+    [
+      "Reason could be because he didn't get corrective feedback.",
+      1,
+      1.0,
+      "A",
+      9.75,
+      7.7,
+      "correct"
+    ]
+  ],
+  "1incorrect": [
+    [
+      "it's not deliberate practice",
+      1,
+      0.0,
+      "B",
+      6.0,
+      7.8,
+      "incorrect"
+    ],
+    [
+      "Even without deliberate practice, Rajeev could improve his skill by practice. If his skill doesn't improve at all, that is not a problem of deliberate practice, it's a problem that he didn't practice the same skill every day. He is not practicing a specific skill (draw the eye of the portrait). Although the lack of feedback is also important, it's more important to focus on the same practice)",
+      1,
+      0.0,
+      "B",
+      8.5,
+      8.0,
+      "incorrect"
+    ],
+    [
+      "The task of creating a portrait is a complex one and should be studied step by step rather than in full. Hence, Rajeev should identify what parts of the portrait are problematic and practice them regularly instead of drawing new full portrait every day.",
+      1,
+      0.0,
+      "B",
+      8.0,
+      8.1,
+      "incorrect"
+    ],
+    [
+      "lack of deliberate practice, to say, always practice a general and broad task set without pinpointing where exactly is not good.",
+      1,
+      0.0,
+      "B",
+      6.75,
+      6.7,
+      "incorrect"
+    ],
+    [
+      "It's not specific enough. Portraiture could be considered the whole task - there are specific techniques that Rajeev should focus on improving before practicing combining into the whole portrait. (Compare to practicing a putt in golf, not all of golf)",
+      1,
+      1.0,
+      "A",
+      6.0,
+      6.8,
+      "incorrect"
+    ],
+    [
+      "People generally can't improve to a higher level without some figure telling them what that higher level is/looks like. For all we know, Rajeev is drawing stick figures and thinks them pretty good. He needs someone/something to evaluate him and tell him what parts of his portrait need improving on so that he can practice those particular aspects.",
+      1,
+      1.0,
+      "A",
+      6.75,
+      7.2,
+      "incorrect"
+    ],
+    [
+      "First, the instruction of practice might not be the best; Second, he didn't have a teacher monitor his practice; Last, he didn't have informative feedback and remedial training.",
+      1,
+      1.0,
+      "A",
+      7.0,
+      7.6,
+      "incorrect"
+    ],
+    [
+      "Despite doing so much practice, there is no one to give Rajeev feedback on his errors and remedial training based on that feedback. So while Rajeev is practicing a lot, he is not doing deliberate practice which focuses on correcting his errors and then improving his skill.",
+      1,
+      1.0,
+      "A",
+      7.0,
+      6.4,
+      "incorrect"
+    ],
+    [
+      "He doesn't have a teacher who supervises him and diagnoses his errors.",
+      1,
+      1.0,
+      "A",
+      6.0,
+      7.0,
+      "incorrect"
+    ],
+    [
+      "It might be that there's no informative feedback and remedial training for him to correct his errors and to improve his skill.",
+      1,
+      1.0,
+      "A",
+      6.0,
+      7.3,
+      "incorrect"
+    ],
+    [
+      "To improve quickly, Rajeev needs deliberate practice, which requires feedbacks.",
+      1,
+      1.0,
+      "A",
+      6.75,
+      7.0,
+      "incorrect"
+    ],
+    [
+      "There's no supervision of an external agent so no feedback",
+      1,
+      1.0,
+      "A",
+      7.0,
+      7.6,
+      "incorrect"
+    ],
+    [
+      "because he needs to be supervised by a teacher to diagnose errors",
+      1,
+      1.0,
+      "A",
+      6.75,
+      6.9,
+      "incorrect"
+    ],
+    [
+      "Not receiving immediate feedback may make Rajeev not yield an improvement.",
+      1,
+      1.0,
+      "A",
+      4.75,
+      6.7,
+      "incorrect"
+    ]
+  ],
+  "questions": [
+    "Every morning, Rajeev spends an hour alone drawing a portrait from a photograph in the day\u2019s newspaper to improve his portraiture skills (skills drawing a portrait). Yet, despite a year of practice, his drawing skills do not seem to improved. Why might simply practicing a portrait a day not yield an improvement?",
+    "Dan wants to improve his golf game. Every day, he practices one golf stroke for an hour, and records his practice session on video. After his practice, he watches the recording, and plans on what changes to make the next day. Assume he has no other golf instruction. Is Dan engaged in deliberate practice? Why?",
+    "Mark is learning to play the guitar. After long hours of practice, he mastered playing his favorite song. Write one growth-mindset building feedback his instructor could give him.",
+    "Many teachers who have used Jigsaw report that students start to see themselves in a different light -- as more competent, likable, and positive contributors to the classroom. Does the Jigsaw method create a growth-intelligence mindset?"
+  ],
+  "2incorrect": [
+    [
+      "Yes, he has isolated a specific task, practices it repeatedly and reviews his sessions to narrow on improvements.",
+      2,
+      0.0,
+      "A, D",
+      6.0,
+      6.8,
+      "incorrect"
+    ],
+    [
+      "Not exactly. To engage in deliberate practice, one must be given explicit instruction about the best method. Since Dan is simply reflecting on his own method and has never compared it with a best method given to him by an expert, this step is not met. You could perhaps argue that the second component of deliberate practice is met, he is his own teacher and diagnosis his own errors. But without the first point, this is meaningless. Finally, the third part of deliberate practice of getting informative feedback and remedial training could be argued that he's doing this for himself. But again, without being able to compare it with a best method, this is meaningless.",
+      2,
+      0.75,
+      "B",
+      6.75,
+      7.2,
+      "incorrect"
+    ],
+    [
+      "No, since he receives no feedback on how well he does. Also, the feedback was not immediate.",
+      2,
+      0.75,
+      "B",
+      6.75,
+      7.0,
+      "incorrect"
+    ],
+    [
+      "No, for he is not supervised and has no instruction from experts.",
+      2,
+      0.75,
+      "B",
+      6.75,
+      6.9,
+      "incorrect"
+    ],
+    [
+      "No, because there is not an external agent providing instructive and immediate feedback in Dan's practice",
+      2,
+      0.75,
+      "B",
+      6.75,
+      6.7,
+      "incorrect"
+    ],
+    [
+      "Not receiving immediate feedback may make Rajeev not yield an improvement.",
+      2,
+      0.75,
+      "B",
+      4.75,
+      6.7,
+      "incorrect"
+    ],
+    [
+      "No. He is not supervised by himself to diagnose errors and does not get informative and timely feedback and remedial training.",
+      2,
+      1.0,
+      "B, C",
+      7.0,
+      7.6,
+      "incorrect"
+    ],
+    [
+      "Dan is not engaged in deliberate practice because of the following reasons : 1. There is no external agent giving him feedback on what he is doing wrong and how to correct it. (corrective feedback). Some of the errors might not be visible to Dan and so it is important to get that feedback from an external agent like a teacher. 2. Remedial training is effective if it is taken immediately and not after some time of getting immediate feedback from an external agent.",
+      2,
+      1.0,
+      "B, C",
+      7.0,
+      6.4,
+      "incorrect"
+    ],
+    [
+      "No because, he is lacking (1) explicit instructions about the best method (2) supervised by a teacher to diagnose erorrs because he s diagnosing them himself and (3) immediate feedback as he watched the videos at the end of the day and gives himself feedback",
+      2,
+      1.0,
+      "B, C",
+      6.0,
+      7.8,
+      "incorrect"
+    ],
+    [
+      "Dan in this case is not able to practice his corrections at the time the errror is spotted. This is not ideal as golf is not a sport that strains the body heavily and thus, it is not the case unlike powerlifting or bodybuilding where the instance for deliberate practice has a limitation on the amount of activity. Additionally, Dan does not get feedback from an expert instructor. Therefore he may see far fewer errors than an instructor does.",
+      2,
+      1.0,
+      "B, C",
+      6.0,
+      7.0,
+      "incorrect"
+    ],
+    [
+      "No, he needs external agent to give informative feedback, as he may be \"unskilled and unaware of it\". Also he needs to receive informative feedback and practise again in a loop which he can not do in the described way.",
+      2,
+      1.0,
+      "B, C",
+      6.0,
+      7.3,
+      "incorrect"
+    ],
+    [
+      "He did not get external feedback on tasks performance.",
+      2,
+      1.0,
+      "B, C",
+      7.0,
+      7.6,
+      "incorrect"
+    ]
+  ],
+  "3correct": [
+    [
+      "You did a great job putting efforts into practice and it paid off!",
+      3,
+      0.75,
+      "B",
+      9.0,
+      7.7,
+      "correct"
+    ],
+    [
+      "You have improved a lot!",
+      3,
+      0.5,
+      "B, C",
+      8.0,
+      7.7,
+      "correct"
+    ],
+    [
+      "Excellent persistence, keep up the motivation!",
+      3,
+      1.0,
+      "B, D",
+      8.0,
+      6.8,
+      "correct"
+    ],
+    [
+      "Good job! You could learn songs by practice. Keep on that!",
+      3,
+      1.0,
+      "B, D",
+      8.0,
+      7.6,
+      "correct"
+    ],
+    [
+      "As Mark has practiced fo long hours, he has probably overcome many difficulties while learning his favorite song. The instructor should point out these difficulties and how Mark overcame them as constructive feedback which can help build the growth-mindset by highlighting that he has already grown from his initial stage.",
+      3,
+      1.0,
+      "B, D",
+      8.0,
+      8.2,
+      "correct"
+    ],
+    [
+      "Good job on practicing the right skill!",
+      3,
+      1.0,
+      "B, D",
+      9.0,
+      7.8,
+      "correct"
+    ],
+    [
+      "You did an excellent job maintaining the right rhythm throughout this song. You've grown tremendously in your skills over the past few days.",
+      3,
+      1.0,
+      "B, D",
+      8.0,
+      7.1,
+      "correct"
+    ],
+    [
+      "Your persistence in practicing chord changes resulted in you altering this song.",
+      3,
+      1.0,
+      "B, D",
+      8.0,
+      8.1,
+      "correct"
+    ],
+    [
+      "Great, you are doing well on this song because of your hard practice. You could do better on other songs and more complex skills if you continue to practice like this.",
+      3,
+      1.0,
+      "B, D",
+      9.0,
+      8.0,
+      "correct"
+    ],
+    [
+      "Congrats Mark! As long as you work hard, you could manage whatever you want! See how much progress you've made!",
+      3,
+      1.0,
+      "B, D",
+      8.0,
+      6.8,
+      "correct"
+    ],
+    [
+      "Your hard work has paid off! Keep up with the great work!",
+      3,
+      1.0,
+      "B, D",
+      9.0,
+      7.6,
+      "correct"
+    ],
+    [
+      "you made a great progress and that is due to your efforts, due to what you did rather than who you are.",
+      3,
+      1.0,
+      "B, D",
+      8.0,
+      6.7,
+      "correct"
+    ]
+  ],
+  "3incorrect": [
+    [
+      "Remind him of long term goals, and the growth that is still possible and how his current achievement reflects that. Basically tell him how great he's done and tell him he's going to continue to better in the future.",
+      3,
+      0.5,
+      "A, B",
+      6.0,
+      7.0,
+      "incorrect"
+    ],
+    [
+      "Great work, you see, your practice did pay off.",
+      3,
+      0.75,
+      "B",
+      6.0,
+      7.2,
+      "incorrect"
+    ],
+    [
+      "One of the most important things about growth mindset is giving feedback on the task that Mark is doing and not on his own personality of him being a talented musician. One growth mindset instruction his instructor could give him is \"Great work in your performance today. Keep up with your perseverance.\"",
+      3,
+      0.25,
+      "A, C, D",
+      6.0,
+      6.4,
+      "incorrect"
+    ],
+    [
+      "Great job. Keep working and putting effort, you will improve more quickly.",
+      3,
+      0.75,
+      "B",
+      7.0,
+      6.8,
+      "incorrect"
+    ],
+    [
+      "Way to go! You have achieved your goal after diligent practice. Keep up the perseverance and you will learn a lot more in the future!",
+      3,
+      0.75,
+      "B, C, D",
+      7.0,
+      7.3,
+      "incorrect"
+    ],
+    [
+      "When I learned to play, I practiced as hard as you just did, and now I become a guitarist. You'll get there too if you keep practicing hard.",
+      3,
+      0.75,
+      "B",
+      7.0,
+      7.3,
+      "incorrect"
+    ],
+    [
+      "Citing the recommended paper, \"Growth-mind-set interventions convey that intelligence can grow when students work hard on challenging tasks\u2014and thus that struggle is an opportunity for growth, not a sign that a student is incapable of learning.\" Given that, option C seems correct as it shows that through struggling, Mark managed to improve his ability to keep the right rhythm.",
+      3,
+      0.75,
+      "D",
+      7.0,
+      8.1,
+      "incorrect"
+    ],
+    [
+      "Amazing job! Great persistent on your learning.",
+      3,
+      0.5,
+      "B, C",
+      7.0,
+      8.3,
+      "incorrect"
+    ],
+    [
+      "What a great job that you achieved the goal of playing your favorite song. It is also great for your persistence of learning and practicing.",
+      3,
+      0.5,
+      "B, C",
+      7.0,
+      6.7,
+      "incorrect"
+    ],
+    [
+      "Great effort! You persisted even when it was frustrating, and now you can play your favorite song! If you stay determined like that, you can learn to play anything!",
+      3,
+      1.0,
+      "B, D",
+      7.0,
+      7.5,
+      "incorrect"
+    ],
+    [
+      "Good job! Now try this beautiful song song (which is harder).",
+      3,
+      1.0,
+      "B, D",
+      6.0,
+      7.0,
+      "incorrect"
+    ],
+    [
+      "Practice makes perfect!",
+      3,
+      1.0,
+      "B, D",
+      7.0,
+      6.9,
+      "incorrect"
+    ]
+  ],
+  "2correct": [
+    [
+      "No, because deliberate practice requires that an external agent provide feedback to the learner.",
+      2,
+      0.5,
+      "C, D",
+      8.5,
+      8.0,
+      "correct"
+    ],
+    [
+      "No. Deliberate practice requires feedback from an external expert, be that a human expert or an agent. Also, he is not making adjustments frequent enough",
+      2,
+      0.75,
+      "B",
+      8.75,
+      8.2,
+      "correct"
+    ],
+    [
+      "no.there's no external resource to provide feedback to him",
+      2,
+      0.75,
+      "B",
+      8.75,
+      7.7,
+      "correct"
+    ],
+    [
+      "because he is not getting task feedback from an external agent, and he is not able to practice corrections immediately.",
+      2,
+      0.75,
+      "B",
+      7.75,
+      6.8,
+      "correct"
+    ],
+    [
+      "no, because he needs an instructor to provide informative feedback",
+      2,
+      0.75,
+      "B",
+      9.75,
+      7.7,
+      "correct"
+    ],
+    [
+      "Dan is not engaged in deliberate practice because he is missing expert feedback. He may be unable to precisely diagnose his mistakes and/or to formulate an optimal plan to address them without supervision. Additionally waiting until the next day to address problems undermines his ability to relate errors to corrections and further removes his routine from deliberate practice.",
+      2,
+      1.0,
+      "B, C",
+      8.0,
+      7.5,
+      "correct"
+    ],
+    [
+      "Dan is not receiving feedback from an external agent as such he may miss errors that he made that someone else might catch. He is also not receiving immediate feedback and both of these things are necessary for deliberate practice. In the options below, I have not selected \"No, because he is not able to practice corrections immediately\" as receiving immediate feedback is not the same as being able to practice corrections on that feedback immediately.",
+      2,
+      1.0,
+      "B, C",
+      8.0,
+      6.8,
+      "correct"
+    ],
+    [
+      "No, because he doesn't have an external mentor to guide the practice.",
+      2,
+      1.0,
+      "B, C",
+      8.0,
+      7.3,
+      "correct"
+    ],
+    [
+      "No, Dan is not engaged in deliberate practice because he is nothing supervised by a teacher to diagnose errors. This is an element of the definition of deliberate practice.",
+      2,
+      1.0,
+      "B, C",
+      8.0,
+      7.1,
+      "correct"
+    ],
+    [
+      "It is. Because it includes practice on a specific skill, supervised by himself, get feedback from himself, and remedial training the next day.",
+      2,
+      1.0,
+      "B, C",
+      8.0,
+      8.1,
+      "correct"
+    ],
+    [
+      "I don't think so. Because he does not have the expertise to give himself corrective feedback.",
+      2,
+      1.0,
+      "B, C",
+      8.0,
+      8.1,
+      "correct"
+    ],
+    [
+      "The feedback needs to be given by an external agent",
+      2,
+      1.0,
+      "B, C",
+      10.0,
+      8.3,
+      "correct"
+    ]
+  ]
+};
