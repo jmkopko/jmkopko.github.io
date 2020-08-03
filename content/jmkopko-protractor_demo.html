@@ -1,0 +1,85 @@
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Tutor</title>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.ctat.cs.cmu.edu/releases/mathtutor/CTAT.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.ctat.cs.cmu.edu/releases/mathtutor/Mathtutor.css">
+    <link rel="stylesheet" type="text/css" href="Assets/demo.css">
+    <link rel="stylesheet" type="text/css" href="Assets/demo-protractor.css">
+
+    <script src="https://cdn.ctat.cs.cmu.edu/releases/mathtutor/jquery.min.js"></script>
+    <script src="Assets/demo-protractor.js"></script>
+    <script src="Assets/demo-testing.js"></script>
+</head>
+
+<body>
+    <main class="CTATTutor">
+        <h1>Tutor</h1>
+        <h3>Problem</h3>
+        <div class="CTATTextField">Protractor Demo</div>
+        <div class="explainer">You can move rays A and E by clicking and dragging, or by specifying an angle for ABD in
+            the box on the
+            right.
+            <br>
+            <br>You can change the labels by clicking on the "Label" button, and change labels to radians by
+            clicking on the "Radians" button
+            <br> (Note that for radian values to display, you need to have labels displaying with label code of 1, 2, or
+            3)
+            <br>Even if radians are selected, the compass reports values as degrees.
+            <br>
+            <br>You can change the increments on the compass using the increment input box. Check the snap box to enable
+            snapping to your increments.</div>
+        <section class="CTATProblemSolving">
+            <h2>Problem Solving</h2>
+            <div id="problem_statement" class="CTATTextField"></div>
+            <div id="wrapper">
+                <div id="angles" class="CTATProtractor--container CTATProtractor">
+                    <svg id="canvas" class="canvas" xmlns="http://www.w3.org/2000/svg"></svg>
+                </div>
+                <div id="values">
+                    <div id="ABD">
+                        <label for="mABD">Angle ABD:</label>
+                        <input type="text" id="mABD" class="inp" name="mABD" value="45" oninput="setABD()">
+                        <br><span id='abd_error' class='error'>Please input a whole <br> number in degrees <br> between
+                            0
+                            and 180.</span>
+                    </div>
+                    <div id="ABC">Angle ABC: <span id="vABC"></span></div>
+                    <div id="EBC">Angle EBC: <span id="vEBC"></span></div>
+                    <div id="EBD">Angle EBD: <span id="vEBD"></span></div>
+                    <div id="ABE">Angle ABE: <span id="vABE"></span></div>
+                    </br>
+                    <div id="increment">
+                        <label for="increment">Increment:</label>
+                        <input type="text" id="incr" name="incr" class="inp" value="15" oninput="setIncr()">
+                        <br><span id='incr_error' class='error'>Please input a value <br> between 10 and 90 <br>that
+                            evenly
+                            divides
+                            180.</span>
+                    </div>
+                    <div id='buttons'>
+                        <button class="buttons" id='but_labels' onclick="setLabels()">Labels</button><span
+                            id="label_num">
+                            1</span>
+                        <button class="buttons" id='but_rads' onclick="setRads()">Radians</button><span id="rad_num">
+                            0</span>
+                    </div>
+                    <div id='snap'>
+                        <span>Snap</span>
+                        <label class="switch">
+
+                            <input name="snap" type="checkbox" onclick="setSnap()" checked="false">
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+
+    </main>
+</body>
+
+</html>
