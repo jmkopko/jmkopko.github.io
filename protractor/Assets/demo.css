@@ -1,0 +1,54 @@
+.canvas {
+  position: absolute;
+  height: inherit;
+  width: inherit;
+  border: 2px solid cornflowerblue;
+  z-index: 2;
+}
+
+#angles {
+  padding: 5px;
+}
+
+.title {
+  font-size: 20;
+}
+
+.inp {
+  width: 40px;
+}
+
+.buttons {
+  justify-self: left;
+}
+
+#buttons {
+  width: inherit;
+  align-content: center;
+}
+
+#wrapper {
+  display: flex;
+  width: 1000px;
+  justify-content: right;
+}
+
+#values {
+  display: grid;
+  align-content: space-around;
+  padding-left: 10px;
+}
+
+.explainer {
+}
+
+.error {
+  font-size: 10px;
+  color: red;
+}
+
+#snap {
+  position: relative;
+}
+
+/* https://www.w3schools.com/howto/howto_css_switch.asp */
