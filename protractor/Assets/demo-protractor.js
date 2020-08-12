@@ -828,7 +828,7 @@ var Protractor = function (aDescription, aX, aY, aWidth, aHeight) {
         var showLabels = this.compLabels;
 
         if (90 % this.interval == 0) {
-            if (this.showLabels == 3 && (this.radians == 1 || this.radians == 2)) {
+            if (showLabels == 3 && (this.radians == 1 || this.radians == 2)) {
                 this.drawLabel90("top");
             }
             if (showLabels > 0) {
