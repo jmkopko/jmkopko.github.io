@@ -828,21 +828,19 @@ var Protractor = function (aDescription, aX, aY, aWidth, aHeight) {
         var showLabels = this.compLabels;
 
         if (90 % this.interval == 0) {
-            if (!(this.radians == 0 || this.radians == 3 || (this.radians == 1 && this.showLabels == 1))) {
+            if (this.showLabels == 3 && (this.radians == 1 || this.radians == 2)) {
                 this.drawLabel90("top");
             }
-            if (!(showLabels == 0)) {
+            if (showLabels > 0) {
                 this.drawLabel90();
             }
         }
-
 
         switch (showLabels) {
             case 1: this.drawLabel1(); break;
             case 2: this.drawLabel2(); break;
             case 3: this.drawLabel1(); this.drawLabel2(); break;
         }
-
     }
 
     this.lookupRadians = function (degree) {
@@ -943,9 +941,7 @@ var Protractor = function (aDescription, aX, aY, aWidth, aHeight) {
             if (this.radians == 1) {
                 rad = true;
             }
-        }
-
-        if (this.radians == 2 || this.radians == 3 || (this.radians == 1 && this.compLabels == 1)) {
+        } else if (this.radians == 2 || this.radians == 3 || (this.radians == 1 && this.compLabels == 1)) {
             rad = true;
         }
 
