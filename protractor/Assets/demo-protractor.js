@@ -941,7 +941,7 @@ var Protractor = function (aDescription, aX, aY, aWidth, aHeight) {
             if (this.radians == 1) {
                 rad = true;
             }
-        } else if ((this.radians == 2 && this.compLabels == 2) || this.radians == 3 || (this.radians == 1 && this.compLabels == 1)) {
+        } else if ((this.radians == 2 && this.compLabels > 1) || this.radians == 3 || (this.radians == 1 && this.compLabels == 1)) {
             rad = true;
         }
 
