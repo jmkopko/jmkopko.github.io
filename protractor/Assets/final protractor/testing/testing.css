@@ -1,0 +1,53 @@
+#angles {
+  height: 400;
+  width: 800;
+}
+
+#angles-mid {
+  height: 200;
+  width: 400;
+}
+
+#angles-small {
+  height: 100;
+  width: 200;
+}
+
+/* #div_protractor {
+  width: inherit;
+  margin: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.canvas {
+  position: absolute;
+  height: inherit;
+  width: inherit;
+  border: 2px solid cornflowerblue;
+  z-index: 2;
+}
+
+.point {
+  position: absolute;
+  cursor: grab;
+  stroke: green;
+  fill: green;
+  stroke-width: 2;
+}
+
+.ray {
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  stroke: green;
+  stroke-width: 2;
+}
+
+#super {
+  height: 363px;
+  width: 604px;
+}
+
+

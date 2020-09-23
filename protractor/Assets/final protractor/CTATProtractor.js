@@ -27,6 +27,8 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
     this.topBound;
     this.bottomBound;
 
+    this.numInteractive
+
 
     //all possible angles in a standard protractor; these angles are explicitly set in addProtrays, and updated in Protray.setPoint
     this.angleEBD;
@@ -56,23 +58,21 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         this.point;     //reference to SVG object at end of ray; 'grabbable' on movable protrays
         this.ray;       //reference to SVG line beginning at origin and ending at point
         this.label;     //reference to SVG text that travels alongside of this.point
-        this.x = x;     // x position of center of this.point
-        this.y = y;     // y position of center of this.point
+        this.arrow;     //reference to SVG arrow that travels beyond top of this.point
+        this.x = x;     // x position of center of this.point for first offset
+        this.y = y;     // y position of center of this.point for first offset
         this.move = move;   //is this a movable protray? (A and E are, C and D are not)
         this.bd; // this corresponds to the base degree system, as well as angle ?BD for this protractor
         var self = this;  // used in animation callback for setPoint.
+        this.scalefactor;   //scale factor needed to make arrowheads scale with size
 
         this.createProtRay = function () {
             // this creates the necessary svg elements, adds them to the canvas and gives their refs to ProtRay object
+            this.scalefactor = self.protractor.magnitude/320;
 
             label = document.createElementNS(svgNS, "text");
-            if (move) {
-                label.setAttributeNS(null, 'x', this.x + self.protractor.magnitude * .09);
-                label.setAttributeNS(null, 'y', this.y);
-            } else {
-                label.setAttributeNS(null, 'x', this.x);
-                label.setAttributeNS(null, 'y', this.y + self.protractor.magnitude * .09);
-            }
+            label.setAttributeNS(null, 'x', this.x + self.protractor.magnitude * .09);
+            label.setAttributeNS(null, 'y', this.y);
             label.classList.add("CTATProtractor--labelray");
             label.appendChild(document.createTextNode(this.name));
 
@@ -88,13 +88,17 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
             point.setAttributeNS(null, 'id', 'point_' + this.name);
             point.setAttributeNS(null, 'cx', this.x);
             point.setAttributeNS(null, 'cy', this.y);
-            point.setAttributeNS(null, 'r', 4 + self.protractor.magnitude * .005);
+            point.setAttributeNS(null, 'r', 3 + 3*this.scalefactor);
 
+            arrow = document.createElementNS(svgNS, "polygon");
+            arrow.setAttributeNS(null, 'id', 'arrow_' + this.name);
+            arrow.setAttributeNS(null, 'points', this.x+","+this.y+" "+(this.x+5*this.scalefactor)+","+(this.y+3*this.scalefactor)+" "+this.x+","+(this.y-10*this.scalefactor)+" "+(this.x-5*this.scalefactor)+","+(this.y+3*this.scalefactor));
 
             self.point = point;
             self.ray = ray;
             self.label = label;
-
+            self.arrow = arrow;
+            
         }
         this.createProtRay();  // call it on object instantiation
 
@@ -103,11 +107,13 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
                 this.point.classList.add("CTATProtractor--select");
                 self.protractor._protrays.append(this.label);
                 self.protractor._protrays.append(this.ray);
+                self.protractor._protrays.append(this.arrow);
                 self.protractor._protrays.append(this.point);
             } else {
                 self.protractor._fgrays.append(this.label);
                 self.protractor._fgrays.append(this.ray);
-                // self.protractor._fgrays.append(this.point);  //not needed for static protrays
+                self.protractor._fgrays.append(this.arrow);
+                self.protractor._fgrays.append(this.point);
             }
             this.bd = this.getAngle();
         }
@@ -125,17 +131,40 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
 
 
         this.moveTo = function (coord) {
+
+            move_angle = self.protractor.calcAngle(coord)
+            move_mag = self.protractor.calcMagMult(coord)
+
+            //need to restore coord
+            point_coord = self.protractor.getPointFromAnglitude(move_angle, self.protractor.magnitude);
+            ray_coord = self.protractor.getPointFromAnglitude(move_angle, self.protractor.magnitude*(move_mag+.075));
+
             // moves all of the component pieces to a coordinate
             this.point.setAttributeNS(null, 'cx', coord.x);
             this.point.setAttributeNS(null, 'cy', coord.y);
-            this.ray.setAttributeNS(null, 'x2', coord.x);
-            this.ray.setAttributeNS(null, 'y2', coord.y);
-            this.label.setAttributeNS(null, 'y', coord.y);
+            this.ray.setAttributeNS(null, 'x2', ray_coord.x);
+            this.ray.setAttributeNS(null, 'y2', ray_coord.y);
+            
+            // all rays MUST start at 90 degrees for this to work; otherwise their ref coord system will be off.
+            // could probably make this a var but not worth the extra complication.
+            arrow_angle = move_angle-90;
 
-            if (coord.x >= this.protractor.origin.x) {
-                this.label.setAttributeNS(null, 'x', coord.x + self.protractor.magnitude * .07);
-            } else {
-                this.label.setAttributeNS(null, 'x', coord.x - self.protractor.magnitude * .07);
+            //arrowhead is a beast
+            this.arrow.setAttributeNS(null, 'transform', "rotate("+arrow_angle+" "+protractor.origin.x+" "+protractor.origin.y+") "
+                                                        +"translate(0 "+(1-move_mag-.075)*self.protractor.magnitude+")");
+
+
+            //label needs to change which side of the marker its on
+            if(this.move) {
+                this.label.setAttributeNS(null, 'y', coord.y);
+                if (coord.x >= this.protractor.origin.x) {
+                    this.label.setAttributeNS(null, 'x', coord.x + self.protractor.magnitude * .07);
+                } else {
+                    this.label.setAttributeNS(null, 'x', coord.x - self.protractor.magnitude * .07);
+                }
+            }  else {
+                this.label.setAttributeNS(null, 'x', coord.x);
+                this.label.setAttributeNS(null, 'y', coord.y + self.protractor.magnitude * .09);
             }
 
             this.bd = this.getAngle();
@@ -145,7 +174,6 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
 
         this.setPoint = function (set_angle) {
             // moves the ProtRay to a new angle, and animates the movement
-            //FIXME there's a bug causing an infinite loop when this calls moveTo (setAttributeNS is receiving null)
 
             let startAngle = Math.floor(this.getAngle());
             let finalAngle = Math.floor(set_angle);
@@ -161,12 +189,11 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
                 return;
             }
 
-            let frame = 11;
+            let frame = 11; //time in ms between frames, used in animFrame
 
             function animFrame(i) {
                 setTimeout(function () {
-                    incrAngle = self.protractor.getPointFromAnglitude(i, self.protractor.magnitude);
-                    self.moveTo(incrAngle);
+                    self.moveTo(self.protractor.getPointFromAnglitude(i, self.protractor.magnitude));
                     if (dir) { i++ } else { i-- };
                     if (i != finalAngle) {
                         setTimeout(function () { animFrame(i); }, frame);
@@ -521,6 +548,7 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         this.drawCompass();
         this.addProtrays(this.numRays);
         this.protRays.forEach(function (item) { item.drawProtRay() })
+        this.initialPositions()
 
         // Set snapping points in case snaps are turned on.
         this.setSnaps();
@@ -662,31 +690,55 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         // 3+ gives ACDE
 
         // always draw A at least, so there's something in the interface.
-        var startA = 135;
+        var startA = 90;
         let coordA = this.getPointFromAnglitude(startA, this.magnitude);
         this.angleABD = startA;
         this.angleABC = 180 - startA;
         this.protRays.push(new ProtRay(this, 'A', coordA.x, coordA.y));
 
         if (numRays > 0) {
-            let coordC = this.getPointFromAnglitude(180, this.magnitude);
+            let coordC = this.getPointFromAnglitude(90, this.magnitude);
             this.protRays.push(new ProtRay(this, 'C', coordC.x, coordC.y, false));
         }
 
         // allows for the second 'base' ray, like point D, that is unmovable but gives rise to angles ?BD.
         if (numRays > 1) {
-            let coordD = this.getPointFromAnglitude(0, this.magnitude);
+            let coordD = this.getPointFromAnglitude(90, this.magnitude);
             this.protRays.push(new ProtRay(this, 'D', coordD.x, coordD.y, false));
         }
 
         if (numRays > 2) {
-            var startE = 45
+            var startE = 90
             let coordE = this.getPointFromAnglitude(startE, this.magnitude);
             this.angleEBD = startE;
             this.angleEBC = 180 - startE;
             this.angleABE = Math.abs(startA - startE);
             this.protRays.push(new ProtRay(this, 'E', coordE.x, coordE.y));
         }
+    }
+
+    this.initialPositions = function() {
+        //temporary function until we figure out what new ray generation will look like
+        numRays = this.numRays;
+
+        this.findProtray("A").moveTo(this.getPointFromAnglitude(135, this.magnitude));
+
+        if (numRays > 0) {
+            this.findProtray("C").moveTo(this.getPointFromAnglitude(180, this.magnitude));
+        }
+
+        // allows for the second 'base' ray, like point D, that is unmovable but gives rise to angles ?BD.
+        if (numRays > 1) {
+            this.findProtray("D").moveTo(this.getPointFromAnglitude(0, this.magnitude));
+        }
+
+        if (numRays > 2) {
+            this.findProtray("E").moveTo(this.getPointFromAnglitude(45, this.magnitude));
+        }
+    }
+
+    this.addRays = function (numRays) {
+
     }
 
     /*************** Compass Setup ***************/
@@ -972,6 +1024,17 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
 
         return calcd_angle;
 
+    }
+
+    this.calcMagMult = function (newCoords) {
+        // Takes a set of (x,y) coordinates, and returns the multiplier for the current magnitude
+        let x = newCoords.x;
+        let y = newCoords.y;
+
+        x_mag = (x - this.origin.x)**2
+        y_mag = (y - this.origin.y)**2
+
+        return Math.sqrt(x_mag + y_mag)/this.magnitude;
     }
 
     this.getPointFromAnglitude = function (inp_angle, magnitude) {

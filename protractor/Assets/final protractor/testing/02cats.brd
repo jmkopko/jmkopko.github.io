@@ -1,0 +1,2311 @@
+<?xml version="1.0" standalone="yes"?>
+
+<stateGraph firstCheckAllStates="true" caseInsensitive="true" unordered="false" lockWidget="true" hintPolicy="Use Both Kinds of Bias" version="4.0" suppressStudentFeedback="Show All Feedback" highlightRightSelection="true" startStateNodeName="state1" tutorType="Example-tracing Tutor">
+    <startNodeMessages>
+        <message>
+            <verb>NotePropertySet</verb>
+            <properties>
+                <MessageType>StartProblem</MessageType>
+                <ProblemName>02cats</ProblemName>
+            </properties>
+        </message>
+        <message>
+            <verb>NotePropertySet</verb>
+            <properties>
+                <MessageType>InterfaceAction</MessageType>
+                <transaction_id>08F270ED-25AF-F928-0F25-4BBEAE666E33</transaction_id>
+                <Selection>
+                    <value>problem_statement</value>
+                </Selection>
+                <Action>
+                    <value>UpdateTextArea</value>
+                </Action>
+                <Input>
+                    <value>Please drag point A so that angle ABC makes a right angle.</value>
+                </Input>
+            </properties>
+        </message>
+        <message>
+            <verb>NotePropertySet</verb>
+            <properties>
+                <MessageType>InterfaceAction</MessageType>
+                <transaction_id>08F270ED-25AF-F928-0F25-4BBEAE666E33</transaction_id>
+                <Selection>
+                    <value>angleBdescr</value>
+                </Selection>
+                <Action>
+                    <value>UpdateTextArea</value>
+                </Action>
+                <Input>
+                    <value>Please drag point A so that angle ABC makes an obtuse angle.</value>
+                </Input>
+            </properties>
+        </message>
+        <message>
+            <verb>NotePropertySet</verb>
+            <properties>
+                <MessageType>InterfaceAction</MessageType>
+                <transaction_id>08F270ED-25AF-F928-0F25-4BBEAE666E33</transaction_id>
+                <Selection>
+                    <value>angleCdescr</value>
+                </Selection>
+                <Action>
+                    <value>UpdateTextArea</value>
+                </Action>
+                <Input>
+                    <value>Please drag point A so that angle ABC makes an angle that measures 170 degrees.</value>
+                </Input>
+            </properties>
+        </message>
+        <message>
+            <verb>NotePropertySet</verb>
+            <properties>
+                <MessageType>InterfaceAction</MessageType>
+                <transaction_id>08F270ED-25AF-F928-0F25-4BBEAE666E33</transaction_id>
+                <Selection>
+                    <value>angleDdescr</value>
+                </Selection>
+                <Action>
+                    <value>UpdateTextArea</value>
+                </Action>
+                <Input>
+                    <value>Please drag point A so that angle ABC makes an acute angle.</value>
+                </Input>
+            </properties>
+        </message>
+        <message>
+            <verb>NotePropertySet</verb>
+            <properties>
+                <MessageType>InterfaceAction</MessageType>
+                <transaction_id>08F270ED-25AF-F928-0F25-4BBEAE666E33</transaction_id>
+                <Selection>
+                    <value>angleEdescr</value>
+                </Selection>
+                <Action>
+                    <value>UpdateTextArea</value>
+                </Action>
+                <Input>
+                    <value>Please look at side AB, what is the measure of angle ABC</value>
+                </Input>
+            </properties>
+        </message>
+        <message>
+            <verb>NotePropertySet</verb>
+            <properties>
+                <MessageType>InterfaceAction</MessageType>
+                <transaction_id>08F270ED-25AF-F928-0F25-4BBEAE666E33</transaction_id>
+                <Selection>
+                    <value>angleFdescr</value>
+                </Selection>
+                <Action>
+                    <value>UpdateTextArea</value>
+                </Action>
+                <Input>
+                    <value>And now, what is the measure of angle ABC</value>
+                </Input>
+            </properties>
+        </message>
+        <message>
+            <verb>NotePropertySet</verb>
+            <properties>
+                <MessageType>InterfaceAction</MessageType>
+                <transaction_id>08F270ED-25AF-F928-0F25-4BBEAE666E33</transaction_id>
+                <Selection>
+                    <value>angleEmoveto</value>
+                </Selection>
+                <Action>
+                    <value>UpdateTextArea</value>
+                </Action>
+                <Input>
+                    <value>180</value>
+                </Input>
+            </properties>
+        </message>
+        <message>
+            <verb>NotePropertySet</verb>
+            <properties>
+                <MessageType>InterfaceAction</MessageType>
+                <transaction_id>08F270ED-25AF-F928-0F25-4BBEAE666E33</transaction_id>
+                <Selection>
+                    <value>angleFmoveto</value>
+                </Selection>
+                <Action>
+                    <value>UpdateTextArea</value>
+                </Action>
+                <Input>
+                    <value>35</value>
+                </Input>
+            </properties>
+        </message>
+        <message>
+            <verb>NotePropertySet</verb>
+            <properties>
+                <MessageType>InterfaceAction</MessageType>
+                <transaction_id>08F270ED-25AF-F928-0F25-4BBEAE666E33</transaction_id>
+                <Selection>
+                    <value>showlabels</value>
+                </Selection>
+                <Action>
+                    <value>UpdateTextArea</value>
+                </Action>
+                <Input>
+                    <value>1</value>
+                </Input>
+            </properties>
+        </message>
+        <message>
+            <verb>NotePropertySet</verb>
+            <properties>
+                <MessageType>StartStateEnd</MessageType>
+            </properties>
+        </message>
+    </startNodeMessages>
+    <node locked="false" doneState="false">
+        <text>02cats</text>
+        <uniqueID>1</uniqueID>
+        <dimension>
+            <x>430</x>
+            <y>30</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state1</text>
+        <uniqueID>2</uniqueID>
+        <dimension>
+            <x>469</x>
+            <y>334</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state3</text>
+        <uniqueID>4</uniqueID>
+        <dimension>
+            <x>476</x>
+            <y>488</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state4</text>
+        <uniqueID>5</uniqueID>
+        <dimension>
+            <x>464</x>
+            <y>618</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state5</text>
+        <uniqueID>6</uniqueID>
+        <dimension>
+            <x>467</x>
+            <y>743</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state6</text>
+        <uniqueID>7</uniqueID>
+        <dimension>
+            <x>467</x>
+            <y>853</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="true">
+        <text>Done</text>
+        <uniqueID>8</uniqueID>
+        <dimension>
+            <x>502</x>
+            <y>2364</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state8</text>
+        <uniqueID>9</uniqueID>
+        <dimension>
+            <x>462</x>
+            <y>992</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state9</text>
+        <uniqueID>10</uniqueID>
+        <dimension>
+            <x>462</x>
+            <y>1102</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state11</text>
+        <uniqueID>12</uniqueID>
+        <dimension>
+            <x>457</x>
+            <y>1212</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state13</text>
+        <uniqueID>14</uniqueID>
+        <dimension>
+            <x>457</x>
+            <y>1436</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state14</text>
+        <uniqueID>15</uniqueID>
+        <dimension>
+            <x>241</x>
+            <y>418</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state24</text>
+        <uniqueID>25</uniqueID>
+        <dimension>
+            <x>674</x>
+            <y>417</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state25</text>
+        <uniqueID>26</uniqueID>
+        <dimension>
+            <x>223</x>
+            <y>712</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state26</text>
+        <uniqueID>27</uniqueID>
+        <dimension>
+            <x>280</x>
+            <y>961</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state27</text>
+        <uniqueID>28</uniqueID>
+        <dimension>
+            <x>276</x>
+            <y>1184</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state29</text>
+        <uniqueID>30</uniqueID>
+        <dimension>
+            <x>638</x>
+            <y>713</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state30</text>
+        <uniqueID>31</uniqueID>
+        <dimension>
+            <x>659</x>
+            <y>964</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state31</text>
+        <uniqueID>32</uniqueID>
+        <dimension>
+            <x>671</x>
+            <y>1183</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state32</text>
+        <uniqueID>33</uniqueID>
+        <dimension>
+            <x>755</x>
+            <y>1571</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state33</text>
+        <uniqueID>34</uniqueID>
+        <dimension>
+            <x>231</x>
+            <y>1600</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state34</text>
+        <uniqueID>35</uniqueID>
+        <dimension>
+            <x>580</x>
+            <y>1612</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state35</text>
+        <uniqueID>36</uniqueID>
+        <dimension>
+            <x>480</x>
+            <y>1828</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state38</text>
+        <uniqueID>39</uniqueID>
+        <dimension>
+            <x>396</x>
+            <y>1629</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state43</text>
+        <uniqueID>44</uniqueID>
+        <dimension>
+            <x>403</x>
+            <y>2030</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state44</text>
+        <uniqueID>45</uniqueID>
+        <dimension>
+            <x>573</x>
+            <y>1998</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state45</text>
+        <uniqueID>46</uniqueID>
+        <dimension>
+            <x>212</x>
+            <y>1997</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state46</text>
+        <uniqueID>47</uniqueID>
+        <dimension>
+            <x>729</x>
+            <y>1967</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state47</text>
+        <uniqueID>48</uniqueID>
+        <dimension>
+            <x>490</x>
+            <y>2203</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state48</text>
+        <uniqueID>49</uniqueID>
+        <dimension>
+            <x>473</x>
+            <y>177</y>
+        </dimension>
+    </node>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>3</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angles</value>
+                    </Selection>
+                    <Action>
+                        <value>SpecifiedAngleSet</value>
+                    </Action>
+                    <Input>
+                        <value>{"ABC":90}</value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <hintMessage>You are asked to drag and drop point A so that ray BA and ray BC make a right angle.</hintMessage>
+            <hintMessage>Remember: a right angle is an angle of 90 degrees.</hintMessage>
+            <hintMessage>Right now the measure of angle ABC is &lt;%=angleReturner(&quot;ABC&quot;)%&gt; degrees. That means you will need a &lt;%=ifThen(greaterThan(angleReturner(&quot;ABC&quot;)*1,93*1),&quot;smaller&quot;,&quot;larger&quot;)%&gt; angle to make a right angle.</hintMessage>
+            <hintMessage>Please drag the dot with 'A' above it so that the ray BA covers the thick mark that says '90'.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angles</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">SpecifiedAngleSet</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher replacementFormula="'{&quot;ABC&quot;:90}'">
+                        <matcherType>ExpressionMatcher</matcherType>
+                        <matcherParameter name="InputExpression">checkInputRange("ABC", 87, 93,input)</matcherParameter>
+                        <matcherParameter name="relation">boolean</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>create_angle 6_32_angles</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>2</sourceID>
+        <destID>4</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>4</uniqueID>
+            <message>
+                <verb>SendNoteProperty</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <Selection>
+                        <value>_root</value>
+                    </Selection>
+                    <Action>
+                        <value>goToStep</value>
+                    </Action>
+                    <Input>
+                        <value></value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <hintMessage>Please provide your answer 'No_Value' in the highlighted element.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">_root</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">goToStep</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">11</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="true">Tutor</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>4</sourceID>
+        <destID>5</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>10</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angles</value>
+                    </Selection>
+                    <Action>
+                        <value>SpecifiedAngleSet</value>
+                    </Action>
+                    <Input>
+                        <value>{"ABC":null}</value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <hintMessage>You are asked to drag and drop point A so that ray BA and ray BC make an obtuse angle.</hintMessage>
+            <hintMessage>Remember: an obtuse angle is an angle larger than 90 degrees.</hintMessage>
+            <hintMessage>Right now the measure of angle ABC is &lt;%=angleReturner(&quot;ABC&quot;)%&gt; degrees. That means you will need a &lt;%=ifThen(greaterThan(angleReturner(&quot;ABC&quot;)*1,180*1),&quot;smaller&quot;,&quot;larger&quot;)%&gt; angle to make an obtuse angle.</hintMessage>
+            <hintMessage>Please drag the dot with 'A' above it so that the ray BA is on the left ray of the '90' degree thick mark.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angles</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">SpecifiedAngleSet</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher replacementFormula="'{&quot;ABC&quot;:null}'">
+                        <matcherType>ExpressionMatcher</matcherType>
+                        <matcherParameter name="InputExpression">checkInputRange("ABC", 91, 180,input)</matcherParameter>
+                        <matcherParameter name="relation">boolean</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>create_angle 6_32_angles</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>5</sourceID>
+        <destID>6</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>11</uniqueID>
+            <message>
+                <verb>SendNoteProperty</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <Selection>
+                        <value>_root</value>
+                    </Selection>
+                    <Action>
+                        <value>goToStep</value>
+                    </Action>
+                    <Input>
+                        <value></value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <hintMessage>Please provide your answer 'No_Value' in the highlighted element.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">_root</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">goToStep</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">12</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="true">Tutor</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>6</sourceID>
+        <destID>7</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>16</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angles</value>
+                    </Selection>
+                    <Action>
+                        <value>SpecifiedAngleSet</value>
+                    </Action>
+                    <Input>
+                        <value>{"ABC":170}</value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <hintMessage>You are asked to drag and drop point A so that ray BA and ray BC make an angle that measures 170 degrees.</hintMessage>
+            <hintMessage>Remember: an angle that measures 170 degrees is more than 165 degrees but less than 180 degrees.</hintMessage>
+            <hintMessage>Right now the measure of angle ABC is &lt;%=angleReturner(&quot;ABC&quot;)%&gt; degrees. That means you will need a &lt;%=ifThen(greaterThan(angleReturner(&quot;ABC&quot;)*1,174*1),&quot;smaller&quot;,&quot;larger&quot;)%&gt; angle to make an angle that measures 170 degrees.</hintMessage>
+            <hintMessage>Please drag the dot with 'A' above it so that the ray BA is between the 165 thick mark and the 180 thick mark, but JUST a little closer to 165 degrees.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angles</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">SpecifiedAngleSet</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher replacementFormula="'{&quot;ABC&quot;:170}'">
+                        <matcherType>ExpressionMatcher</matcherType>
+                        <matcherParameter name="InputExpression">checkInputRange("ABC", 167, 174,input)</matcherParameter>
+                        <matcherParameter name="relation">boolean</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>create_angle 6_32_angles</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>7</sourceID>
+        <destID>9</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>17</uniqueID>
+            <message>
+                <verb>SendNoteProperty</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <Selection>
+                        <value>_root</value>
+                    </Selection>
+                    <Action>
+                        <value>goToStep</value>
+                    </Action>
+                    <Input>
+                        <value></value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <hintMessage>Please provide your answer 'No_Value' in the highlighted element.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">_root</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">goToStep</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">13</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="true">Tutor</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>9</sourceID>
+        <destID>10</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>19</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angles</value>
+                    </Selection>
+                    <Action>
+                        <value>SpecifiedAngleSet</value>
+                    </Action>
+                    <Input>
+                        <value>{"ABC":null}</value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <hintMessage>You are asked to drag and drop point A so that ray BA and ray BC make an acute angle.</hintMessage>
+            <hintMessage>Remember: an acute angle is an angle smaller than 90 degrees.</hintMessage>
+            <hintMessage>Right now the measure of angle ABC is &lt;%=angleReturner(&quot;ABC&quot;)%&gt; degrees. That means you will need a &lt;%=ifThen(greaterThan(angleReturner(&quot;ABC&quot;)*1,90*1),&quot;smaller&quot;,&quot;larger&quot;)%&gt; angle to make an acute angle.</hintMessage>
+            <hintMessage>Please drag the dot with 'A' above it so that the ray BA is on the right side of the '90' degree thick mark.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angles</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">SpecifiedAngleSet</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher replacementFormula="'{&quot;ABC&quot;:null}'">
+                        <matcherType>ExpressionMatcher</matcherType>
+                        <matcherParameter name="InputExpression">checkInputRange("ABC", 0, 90,input)</matcherParameter>
+                        <matcherParameter name="relation">boolean</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>create_angle 6_32_angles</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>10</sourceID>
+        <destID>12</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="false" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>36</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angles</value>
+                    </Selection>
+                    <Action>
+                        <value>SpecifiedAngleSet</value>
+                    </Action>
+                    <Input>
+                        <value></value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct. You need a larger angle than &lt;%=angleReturner(&quot;ABC&quot;)%&gt; degrees to make an obtuse angle.</buggyMessage>
+            <successMessage></successMessage>
+            <callbackFn></callbackFn>
+            <actionType>Buggy Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angles</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">SpecifiedAngleSet</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExpressionMatcher</matcherType>
+                        <matcherParameter name="InputExpression">checkInputRangeLower("ABC",91,input)</matcherParameter>
+                        <matcherParameter name="relation">boolean</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>5</sourceID>
+        <destID>26</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="false" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>37</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angles</value>
+                    </Selection>
+                    <Action>
+                        <value>SpecifiedAngleSet</value>
+                    </Action>
+                    <Input>
+                        <value></value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct. You need a larger angle than &lt;%=angleReturner(&quot;ABC&quot;)%&gt; degrees to make an angle that measures 170 degrees.</buggyMessage>
+            <successMessage></successMessage>
+            <callbackFn></callbackFn>
+            <actionType>Buggy Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angles</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">SpecifiedAngleSet</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExpressionMatcher</matcherType>
+                        <matcherParameter name="InputExpression">checkInputRangeLower("ABC",167,input)</matcherParameter>
+                        <matcherParameter name="relation">boolean</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>7</sourceID>
+        <destID>27</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="false" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>38</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angles</value>
+                    </Selection>
+                    <Action>
+                        <value>SpecifiedAngleSet</value>
+                    </Action>
+                    <Input>
+                        <value></value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct. You need a larger angle than &lt;%=angleReturner(&quot;ABC&quot;)%&gt; degrees to make an acute angle.</buggyMessage>
+            <successMessage></successMessage>
+            <callbackFn></callbackFn>
+            <actionType>Buggy Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angles</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">SpecifiedAngleSet</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExpressionMatcher</matcherType>
+                        <matcherParameter name="InputExpression">checkInputRangeLower("ABC",0,input)</matcherParameter>
+                        <matcherParameter name="relation">boolean</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>10</sourceID>
+        <destID>28</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="false" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>23</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angles</value>
+                    </Selection>
+                    <Action>
+                        <value>SpecifiedAngleSet</value>
+                    </Action>
+                    <Input>
+                        <value></value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct. You need a larger angle than &lt;%=angleReturner(&quot;ABC&quot;)%&gt; degrees to make a right angle.</buggyMessage>
+            <successMessage></successMessage>
+            <callbackFn></callbackFn>
+            <actionType>Buggy Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angles</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">SpecifiedAngleSet</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExpressionMatcher</matcherType>
+                        <matcherParameter name="InputExpression">checkInputRangeLower("ABC",87,input)</matcherParameter>
+                        <matcherParameter name="relation">boolean</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>2</sourceID>
+        <destID>15</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="false" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>41</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angles</value>
+                    </Selection>
+                    <Action>
+                        <value>SpecifiedAngleSet</value>
+                    </Action>
+                    <Input>
+                        <value></value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct. You need a smaller angle than &lt;%=angleReturner(&quot;ABC&quot;)%&gt; degrees to make an obtuse angle.</buggyMessage>
+            <successMessage></successMessage>
+            <callbackFn></callbackFn>
+            <actionType>Buggy Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angles</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">SpecifiedAngleSet</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExpressionMatcher</matcherType>
+                        <matcherParameter name="InputExpression">checkInputRangeUpper("ABC",180,input)</matcherParameter>
+                        <matcherParameter name="relation">boolean</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>5</sourceID>
+        <destID>30</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="false" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>42</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angles</value>
+                    </Selection>
+                    <Action>
+                        <value>SpecifiedAngleSet</value>
+                    </Action>
+                    <Input>
+                        <value></value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct. You need a smaller angle than &lt;%=angleReturner(&quot;ABC&quot;)%&gt; degrees to make an angle that measures 170 degrees.</buggyMessage>
+            <successMessage></successMessage>
+            <callbackFn></callbackFn>
+            <actionType>Buggy Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angles</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">SpecifiedAngleSet</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExpressionMatcher</matcherType>
+                        <matcherParameter name="InputExpression">checkInputRangeUpper("ABC",174,input)</matcherParameter>
+                        <matcherParameter name="relation">boolean</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>7</sourceID>
+        <destID>31</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="false" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>43</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angles</value>
+                    </Selection>
+                    <Action>
+                        <value>SpecifiedAngleSet</value>
+                    </Action>
+                    <Input>
+                        <value></value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct. You need a smaller angle than &lt;%=angleReturner(&quot;ABC&quot;)%&gt; degrees to make an acute angle.</buggyMessage>
+            <successMessage></successMessage>
+            <callbackFn></callbackFn>
+            <actionType>Buggy Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angles</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">SpecifiedAngleSet</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExpressionMatcher</matcherType>
+                        <matcherParameter name="InputExpression">checkInputRangeUpper("ABC",90,input)</matcherParameter>
+                        <matcherParameter name="relation">boolean</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>10</sourceID>
+        <destID>32</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="false" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>35</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angles</value>
+                    </Selection>
+                    <Action>
+                        <value>SpecifiedAngleSet</value>
+                    </Action>
+                    <Input>
+                        <value></value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct. You need a smaller angle than &lt;%=angleReturner(&quot;ABC&quot;)%&gt; degrees to make a right angle.</buggyMessage>
+            <successMessage></successMessage>
+            <callbackFn></callbackFn>
+            <actionType>Buggy Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angles</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">SpecifiedAngleSet</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExpressionMatcher</matcherType>
+                        <matcherParameter name="InputExpression">checkInputRangeUpper("ABC",93,input)</matcherParameter>
+                        <matcherParameter name="relation">boolean</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>2</sourceID>
+        <destID>25</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="false" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>45</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angleE</value>
+                    </Selection>
+                    <Action>
+                        <value>UpdateTextField</value>
+                    </Action>
+                    <Input>
+                        <value>59.8</value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct. The angle ABC is smaller than &lt;%=input%&gt; degrees.</buggyMessage>
+            <successMessage></successMessage>
+            <callbackFn></callbackFn>
+            <actionType>Buggy Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angleE</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">UpdateTextField</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExpressionMatcher</matcherType>
+                        <matcherParameter name="InputExpression">not(greaterThan(181*1,input*1))</matcherParameter>
+                        <matcherParameter name="relation">boolean</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>14</sourceID>
+        <destID>33</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="false" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>46</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angleE</value>
+                    </Selection>
+                    <Action>
+                        <value>UpdateTextField</value>
+                    </Action>
+                    <Input>
+                        <value>59.8</value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct. The angle ABC is larger than &lt;%=input%&gt; degrees.</buggyMessage>
+            <successMessage></successMessage>
+            <callbackFn></callbackFn>
+            <actionType>Buggy Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angleE</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">UpdateTextField</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExpressionMatcher</matcherType>
+                        <matcherParameter name="InputExpression">not(greaterThan(input*1,178*1))</matcherParameter>
+                        <matcherParameter name="relation">boolean</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>14</sourceID>
+        <destID>34</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>47</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angleE</value>
+                    </Selection>
+                    <Action>
+                        <value>UpdateTextField</value>
+                    </Action>
+                    <Input>
+                        <value>59.8</value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage>Yes! Angle ABC is exactly 180 degrees.</successMessage>
+            <hintMessage>You are asked to find the measure of the angle that ray BA and ray BC make (angle ABC).</hintMessage>
+            <hintMessage>Is the angle larger or smaller than 90 degrees?</hintMessage>
+            <hintMessage>The angle is &lt;%=ifThen(greaterThan(180,90),&quot;larger&quot;,&quot;smaller&quot;)%&gt; than 90 degrees. Please look at ray BA, it is all the way to the left.</hintMessage>
+            <hintMessage>The ray BA covers the 180 degree thick mark.</hintMessage>
+            <hintMessage>Please enter '180' in the highlighted field.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angleE</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">UpdateTextField</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">180</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>read_angle 6_32_angles</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>14</sourceID>
+        <destID>35</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="false" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>66</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angleE</value>
+                    </Selection>
+                    <Action>
+                        <value>UpdateTextField</value>
+                    </Action>
+                    <Input>
+                        <value></value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage>OK, close enough! (Angle ABC was 180 degrees)</successMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angleE</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">UpdateTextField</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExpressionMatcher</matcherType>
+                        <matcherParameter name="InputExpression">and(
+greaterThan(input*1,178*1),
+greaterThan(181*1,input*1),
+not(equals(input,180)))</matcherParameter>
+                        <matcherParameter name="relation">boolean</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>read_angle 6_32_angles</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>14</sourceID>
+        <destID>39</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="false" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>73</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angleF</value>
+                    </Selection>
+                    <Action>
+                        <value>UpdateTextField</value>
+                    </Action>
+                    <Input>
+                        <value>59.8</value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage>OK, close enough! (Angle ABC was 35 degrees)</successMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angleF</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">UpdateTextField</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExpressionMatcher</matcherType>
+                        <matcherParameter name="InputExpression">and(
+greaterThan(input*1,32*1),
+greaterThan(39*1,input*1),
+not(equals(input,35)))</matcherParameter>
+                        <matcherParameter name="relation">boolean</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>read_angle 6_32_angles</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>36</sourceID>
+        <destID>44</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="false" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>75</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angleF</value>
+                    </Selection>
+                    <Action>
+                        <value>UpdateTextField</value>
+                    </Action>
+                    <Input>
+                        <value>59.8</value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct. The angle ABC is larger than &lt;%=input%&gt; degrees.</buggyMessage>
+            <successMessage></successMessage>
+            <callbackFn></callbackFn>
+            <actionType>Buggy Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angleF</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">UpdateTextField</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExpressionMatcher</matcherType>
+                        <matcherParameter name="InputExpression">not(greaterThan(input*1,32*1))</matcherParameter>
+                        <matcherParameter name="relation">boolean</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>36</sourceID>
+        <destID>46</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="false" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>76</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angleF</value>
+                    </Selection>
+                    <Action>
+                        <value>UpdateTextField</value>
+                    </Action>
+                    <Input>
+                        <value>59.8</value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct. The angle ABC is smaller than &lt;%=input%&gt; degrees.</buggyMessage>
+            <successMessage></successMessage>
+            <callbackFn></callbackFn>
+            <actionType>Buggy Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angleF</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">UpdateTextField</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExpressionMatcher</matcherType>
+                        <matcherParameter name="InputExpression">not(greaterThan(39*1,input*1))</matcherParameter>
+                        <matcherParameter name="relation">boolean</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>36</sourceID>
+        <destID>47</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>77</uniqueID>
+            <message>
+                <verb>SendNoteProperty</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <Selection>
+                        <value>_root</value>
+                    </Selection>
+                    <Action>
+                        <value>goToStep</value>
+                    </Action>
+                    <Input>
+                        <value></value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <hintMessage>Please provide your answer 'No_Value' in the highlighted element.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">_root</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">goToStep</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">16</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="true">Tutor</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>44</sourceID>
+        <destID>48</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>2</uniqueID>
+            <message>
+                <verb>SendNoteProperty</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <Selection>
+                        <value>_root</value>
+                    </Selection>
+                    <Action>
+                        <value>goToStep</value>
+                    </Action>
+                    <Input>
+                        <value>10</value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <hintMessage>Please provide your answer 'No_Value' in the highlighted element.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">_root</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">goToStep</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">101</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Tutor</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>49</sourceID>
+        <destID>2</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>1</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angles</value>
+                    </Selection>
+                    <Action>
+                        <value>SpecifiedAngleSet</value>
+                    </Action>
+                    <Input>
+                        <value>59.8</value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angles</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">SpecifiedAngleSet</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">150</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="true">Tutor (unevaluated)</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>1</sourceID>
+        <destID>49</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>79</uniqueID>
+            <message>
+                <verb>SendNoteProperty</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <Selection>
+                        <value>_root</value>
+                    </Selection>
+                    <Action>
+                        <value>goToStep</value>
+                    </Action>
+                    <Input>
+                        <value></value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <hintMessage>Please provide your answer 'No_Value' in the highlighted element.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">_root</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">goToStep</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">16</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="true">Tutor</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>45</sourceID>
+        <destID>48</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>74</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>1B4E408B85E13C5BFD0D922D5885FCFF4C81FAD</transaction_id>
+                    <Selection>
+                        <value>angleF</value>
+                    </Selection>
+                    <Action>
+                        <value>UpdateTextField</value>
+                    </Action>
+                    <Input>
+                        <value>59.8</value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage>Yes! Angle ABC is exactly 35 degrees.</successMessage>
+            <hintMessage>You are asked to find the measure of the angle that ray BA and ray BC make (angle ABC).</hintMessage>
+            <hintMessage>Is the angle larger or smaller than 90 degrees?</hintMessage>
+            <hintMessage>The angle is &lt;%=ifThen(greaterThan(35,90),&quot;larger&quot;,&quot;smaller&quot;)%&gt; than 90 degrees. Please look at which thick marks ray BA is in between.</hintMessage>
+            <hintMessage>The ray BA is between 30 and 45 degrees, but definitely closer to 30 degrees.</hintMessage>
+            <hintMessage>Please enter '35' in the highlighted field.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">angleF</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">UpdateTextField</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">35</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>read_angle 6_32_angles</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>36</sourceID>
+        <destID>45</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>13</uniqueID>
+            <message>
+                <verb>NotePropertySet</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <transaction_id>FF82783DA71EC1170643148410B5289E3D9303F</transaction_id>
+                    <Selection>
+                        <value>done</value>
+                    </Selection>
+                    <Action>
+                        <value>ButtonPressed</value>
+                    </Action>
+                    <Input>
+                        <value>-1</value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <hintMessage>Please click on the highlighted button.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matcher>
+                <matcherType>ExactMatcher</matcherType>
+                <matcherParameter name="selection">done</matcherParameter>
+                <matcherParameter name="action">ButtonPressed</matcherParameter>
+                <matcherParameter name="input">-1</matcherParameter>
+                <matcherParameter name="actor">Student</matcherParameter>
+            </matcher>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>48</sourceID>
+        <destID>8</destID>
+        <traversalCount>0</traversalCount>
+        <SimSt></SimSt>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>69</uniqueID>
+            <message>
+                <verb>SendNoteProperty</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <Selection>
+                        <value>_root</value>
+                    </Selection>
+                    <Action>
+                        <value>goToStep</value>
+                    </Action>
+                    <Input>
+                        <value></value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <hintMessage>Please provide your answer 'No_Value' in the highlighted element.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">_root</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">goToStep</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">1535</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="true">Tutor</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>39</sourceID>
+        <destID>36</destID>
+        <traversalCount>0</traversalCount>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>48</uniqueID>
+            <message>
+                <verb>SendNoteProperty</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <Selection>
+                        <value>_root</value>
+                    </Selection>
+                    <Action>
+                        <value>goToStep</value>
+                    </Action>
+                    <Input>
+                        <value></value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <hintMessage>Please provide your answer 'No_Value' in the highlighted element.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">_root</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">goToStep</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">1535</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="true">Tutor</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>35</sourceID>
+        <destID>36</destID>
+        <traversalCount>0</traversalCount>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>21</uniqueID>
+            <message>
+                <verb>SendNoteProperty</verb>
+                <properties>
+                    <MessageType>InterfaceAction</MessageType>
+                    <Selection>
+                        <value>_root</value>
+                    </Selection>
+                    <Action>
+                        <value>goToStep</value>
+                    </Action>
+                    <Input>
+                        <value></value>
+                    </Input>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <hintMessage>Please provide your answer 'No_Value' in the highlighted element.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">_root</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">goToStep</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">14180</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="true">Tutor</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>12</sourceID>
+        <destID>14</destID>
+        <traversalCount>0</traversalCount>
+    </edge>
+    <productionRule opportunities="2">
+        <ruleName>read_angle</ruleName>
+        <productionSet>6_32_angles</productionSet>
+        <label>Read-off a simple angle</label>
+        <description>The student is able to read an angle off the protractor</description>
+    </productionRule>
+    <productionRule opportunities="4">
+        <ruleName>create_angle</ruleName>
+        <productionSet>6_32_angles</productionSet>
+        <label>Create a simple angle</label>
+        <description>The student is able to use the protractor to generate a simple angle between 0 and 180 degrees</description>
+    </productionRule>
+    <EdgesGroups ordered="true"></EdgesGroups>
+</stateGraph>
+
