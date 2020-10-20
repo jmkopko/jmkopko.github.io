@@ -19,7 +19,6 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
     this.interval = 15;     //defaults to 15 degree interval.
     this.snap = false;      //snapping off by default.
     this.snaps = [];
-    this.compLabels = 2;    //defaults to the inner labels and angle ABC.
     this.protRays = [];
     this.origin = { x: null, y: null };
     this.leftBound;     // Bounds are so that ray drags do not fall outside the SVG canvas
@@ -27,7 +26,12 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
     this.topBound;
     this.bottomBound;
 
-    this.numInteractive
+    this.basePointString = "OB";
+    this.basePoints = {};
+    this.interactivePointString = "A";
+    this.interactivePoints = {};
+    this.innerLabels = 'none';
+    this.outerLabels = "counterclockwise degrees"
 
 
     //all possible angles in a standard protractor; these angles are explicitly set in addProtrays, and updated in Protray.setPoint
@@ -149,7 +153,7 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
             // could probably make this a var but not worth the extra complication.
             arrow_angle = move_angle-90;
 
-            //arrowhead is a beast
+            //arrowhead movement is complicated, but this is about as simple as it gets
             this.arrow.setAttributeNS(null, 'transform', "rotate("+arrow_angle+" "+protractor.origin.x+" "+protractor.origin.y+") "
                                                         +"translate(0 "+(1-move_mag-.075)*self.protractor.magnitude+")");
 
@@ -358,11 +362,18 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
             sai.setInput($div.attr('data-ctat-protrays'));
             actions.push(sai);
         }
-        if ($div.attr('data-ctat-complabels')) {
+        if ($div.attr('data-ctat-outer-labels')) {
             var sai = new CTATSAI();
             sai.setSelection(this.getName());
-            sai.setAction('setLabels');
-            sai.setInput($div.attr('data-ctat-complabels'));
+            sai.setAction('setOuterLabels');
+            sai.setInput($div.attr('data-ctat-outer-labels'));
+            actions.push(sai);
+        }
+        if ($div.attr('data-ctat-inner-labels')) {
+            var sai = new CTATSAI();
+            sai.setSelection(this.getName());
+            sai.setAction('setInnerLabels');
+            sai.setInput($div.attr('data-ctat-inner-labels'));
             actions.push(sai);
         }
         if ($div.attr('data-ctat-radians')) {
@@ -420,11 +431,6 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
     this.setParameterHandler('interval', this.setInterval);
     this.data_ctat_handlers['interval'] = this.setInterval;
 
-    this.setLabels = function (labelcode) {
-        this.compLabels = labelcode;
-    }
-    this.setParameterHandler('complabels', this.setLabels);
-    this.data_ctat_handlers['complabels'] = this.setLabels;
 
     this.setRadians = function (radcode) {
         this.radians = radcode;
@@ -531,18 +537,7 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         this.component.addEventListener('mousemove', handle_drag);
         this.component.addEventListener('mouseup', handle_drag_end);
 
-        // Dimension the SVG based on its parent size.
-        let bbox = this.getBoundingBox();
-
-        this.leftBound = Math.floor(bbox.width * .05);
-        this.rightBound = Math.floor(bbox.width * .95);
-        this.topBound = Math.floor(bbox.height * .05);
-        this.bottomBound = Math.floor(bbox.width * .95);
-
-        // Dimension and position the protractor itself within the SVG
-        this.magnitude = Math.min(bbox.width * .4, bbox.height * 0.8);
-        this.origin.x = bbox.width / 2;
-        this.origin.y = bbox.height / 2 + this.magnitude / 2;
+        this.dimensionalize();
 
         // Draw the protractor, create protrays based on the initial elements, and add them to the SVG.
         this.drawCompass();
@@ -563,12 +558,28 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         this.setComponent(div);
         this.setFontSize();
 
-
+        console.log("BBOX 2: ");
+        console.log(this.getBoundingBox());
         // finish any initialization here.
         this.setInitialized(true);
         this.addComponentReference(this, div);
     };
 
+    this.dimensionalize = function() {
+        let bbox = this.getBoundingBox();
+        console.log("BBOX CALL: ");
+        console.log(bbox);
+
+        this.leftBound = Math.floor(bbox.width * .05);
+        this.rightBound = Math.floor(bbox.width * .95);
+        this.topBound = Math.floor(bbox.height * .05);
+        this.bottomBound = Math.floor(bbox.width * .95);
+
+        // Dimension and position the protractor itself within the SVG
+        this.magnitude = Math.min(bbox.width * .4, bbox.height * 0.8);
+        this.origin.x = bbox.width / 2;
+        this.origin.y = bbox.height / 2 + this.magnitude / 2;
+    }
 
     /**
      * SpecifiedAngleSet
@@ -717,6 +728,8 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         }
     }
 
+    
+
     this.initialPositions = function() {
         //temporary function until we figure out what new ray generation will look like
         numRays = this.numRays;
@@ -740,6 +753,64 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
     this.addRays = function (numRays) {
 
     }
+
+    /*************** Drawing ***************/
+
+    this.render = function() {
+        // have to draw compass, labels, ticks, and rays with current position.
+        var div = this.getDivWrap();
+
+
+        // Dimension the SVG based on its parent size.
+        let bbox = this.getBoundingBox();
+
+        this.leftBound = Math.floor(bbox.width * .05);
+        this.rightBound = Math.floor(bbox.width * .95);
+        this.topBound = Math.floor(bbox.height * .05);
+        this.bottomBound = Math.floor(bbox.width * .95);
+
+        // Dimension and position the protractor itself within the SVG
+        this.magnitude = Math.min(bbox.width * .4, bbox.height * 0.8);
+        this.origin.x = bbox.width / 2;
+        this.origin.y = bbox.height / 2 + this.magnitude / 2;
+
+        // Draw the protractor, create protrays based on the initial elements, and add them to the SVG.
+        this.renderCompass();
+        this.redrawLabels();
+
+        this.protRays.forEach(function (item) { item.setPoint(item.bd); })
+
+
+        //TODO finish render method.
+
+
+
+        // Set snapping points in case snaps are turned on.
+        this.setSnaps();
+
+
+        // console.log("CTAT Protractor object on next line"); //DBG final protractor object
+        // console.log(this);
+
+        this.setComponent(div);
+        this.setFontSize();
+
+
+        // finish any initialization here.
+        this.setInitialized(true);
+        this.addComponentReference(this, div);
+        //compass
+
+
+        //labels
+
+
+        //ticks
+
+
+        //rays
+    }
+
 
     /*************** Compass Setup ***************/
     /**
@@ -781,6 +852,13 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         this.createTicks();
     }
 
+    this.renderCompass = function() {
+        this._compass.firstElementChild.setAttributeNS(null, 'd', "M " + this.origin.x + " " + this.origin.y +
+        "H " + (this.origin.x + this.magnitude) +
+        " A " + this.magnitude + " " + this.magnitude + " 0 0 0 " + (this.origin.x - this.magnitude) + " " + this.origin.y +
+        " H " + this.origin.x);
+    }
+
     /*************** Label Setup ***************/
     /**
     * These functions are used to draw angle labels on top of the compass
@@ -819,31 +897,21 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
     }
 
     this.drawLabels = function () {
-
-        //TODO change drawLabel90 so that it can go above/below the line
-        // also, just have it called from inside draw label 1 and 2?
-        //      --Nah, doesn't make anything easier or more comprehensible, plus they're already pretty complicated.
-        // find a way to prevent it from being duplicated tho; if radians = 0 or 3 
-
-        //FIXME man, these if/cases for the 90 interval are kinda incomprehensible.  It's all to make it so that you don't
-        //      have a redundant 90 label, which was a feature of the original Flash tutor.  Probably a way to refactor this and
-        //      make it more comprehensible.
-
-        var showLabels = this.compLabels;
-
         if (90 % this.interval == 0) {
-            if (showLabels == 3 && (this.radians == 1 || this.radians == 2)) {
+            if (this.outerLabels != 'none') {
                 this.drawLabel90("top");
             }
-            if (showLabels > 0) {
+            if (this.innerLabels != 'none') {
                 this.drawLabel90();
             }
         }
 
-        switch (showLabels) {
-            case 1: this.drawLabel1(); break;
-            case 2: this.drawLabel2(); break;
-            case 3: this.drawLabel1(); this.drawLabel2(); break;
+        if (this.outerLabels != 'none') {
+            this.drawLabelOuter();
+        }
+
+        if (this.innerLabels != 'none') {
+            this.drawLabelInner();
         }
     }
 
@@ -886,10 +954,22 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
     // magnitude (offset multiplier is used in coord.x-this.origin.x * multiplier in code below)
     // maybe its own method, uses this.radians and whether it's label1 or label2 to convert coords passed in?
 
-    // drawLabel1 handles the "outer" labels.
-    this.drawLabel1 = function () {
+    this.setOuterLabels = function (setString) {
+        this.outerLabels = setString;
+    }
+    this.setParameterHandler('outer-labels', this.setOuterLabels);
+    this.data_ctat_handlers['outer-labels'] = this.setOuterLabels;
+
+
+    this.drawLabelOuter = function () {
         var rads = false;
-        if (this.radians == 1 || this.radians == 3) {
+        var clockwise = true; // false is counterclockwise
+
+        if(this.outerLabels.includes("counter")) {
+            var clockwise = false;
+        }
+
+        if (this.outerLabels.includes("rad")) {
             rads = true;
         }
 
@@ -900,10 +980,11 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         for (j = 0; j <= 180; j += intrv) {
             if (j !== 90) {
                 coord = this.getPointFromAnglitude(j, this.magnitude * 1.1);
+                label_num = (clockwise) ? j : 180 - j; 
                 if (rads) {
-                    this.createLabel(coord.x + (coord.x - this.origin.x) * .05, coord.y + 5, this.lookupRadians(180 - j), 'set1');
+                    this.createLabel(coord.x + (coord.x - this.origin.x) * .05, coord.y + 5, this.lookupRadians(label_num), 'outer');
                 } else {
-                    this.createLabel(coord.x, coord.y + 5, j, 'set1');
+                    this.createLabel(coord.x, coord.y + 5, label_num, 'outer');
                 }
 
             }
@@ -911,32 +992,45 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         }
     }
 
-    // drawLabel2 handles the "inner" labels.
-    this.drawLabel2 = function () {
+
+    this.setInnerLabels = function (setString) {
+        this.innerLabels = setString;
+    }
+    this.setParameterHandler('inner-labels', this.setInnerLabels);
+    this.data_ctat_handlers['inner-labels'] = this.setInnerLabels;
+
+    // drawLabelInner handles the "inner" labels.
+    this.drawLabelInner = function () {
         var rads = false;
-        if (this.radians == 2 || this.radians == 3) {
+        var clockwise = true; // false is counterclockwise
+
+        if(this.innerLabels.includes("counter")) {
+            var clockwise = false;
+        }
+
+        if (this.innerLabels.includes("rad")) {
             rads = true;
         }
 
         var intrv;
         (this.interval < 10 || this.interval < 15 && rads) ? intrv = this.interval * 2 : intrv = this.interval;
 
+
         for (j = 0; j <= 180; j += intrv) {
             if (j !== 90) {
+                label_num = (clockwise) ? j : 180 - j;
+                coord = this.getPointFromAnglitude(j, this.magnitude * 0.9);
                 if (j === 0 || j === 180) {
-                    coord = this.getPointFromAnglitude(j, this.magnitude * 0.9);
                     if (rads) {
-                        this.createLabel(coord.x, coord.y - 5, this.lookupRadians(j), 'set2');
+                        this.createLabel(coord.x, coord.y - 5, this.lookupRadians(label_num), 'inner');
                     } else {
-                        this.createLabel(coord.x, coord.y - 5, 180 - j, 'set2');
+                        this.createLabel(coord.x, coord.y - 5, label_num, 'inner');
                     }
-
                 } else {
-                    coord = this.getPointFromAnglitude(j, this.magnitude * 0.9);
                     if (rads) {
-                        this.createLabel(coord.x - (coord.x - this.origin.x) * .07, coord.y, this.lookupRadians(j), 'set2');
+                        this.createLabel(coord.x - (coord.x - this.origin.x) * .07, coord.y, this.lookupRadians(label_num), 'inner');
                     } else {
-                        this.createLabel(coord.x, coord.y, 180 - j, 'set2');
+                        this.createLabel(coord.x, coord.y, label_num, 'inner');
                     }
 
                 }
@@ -948,15 +1042,17 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
     this.drawLabel90 = function (location = "bottom") {
         var rad = false;
         var mag = this.magnitude * 0.88;
+
+        
+
         if (location == "top") {
             mag = this.magnitude * 1.05;
-            if (this.radians == 1) {
+            if (this.outerLabels.includes("rad")) {
                 rad = true;
             }
-        } else if ((this.radians == 2 && this.compLabels > 1) || this.radians == 3 || (this.radians == 1 && this.compLabels == 1)) {
+        } else if (this.innerLabels.includes("rad")) {
             rad = true;
         }
-
 
         coord = this.getPointFromAnglitude(90, mag);
         var text;
@@ -969,13 +1065,13 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
 
     this.hideLabels = function (labelset) {
 
-        if (labelset == 1) {
-            $(".set1").hide();
-        } else if (labelset == 2) {
-            $(".set2").hide();
+        if (labelset == "outer") {
+            $(".outer").hide();
+        } else if (labelset == "inner") {
+            $(".inner").hide();
         } else {
-            $(".set1").hide();
-            $(".set2").hide();
+            $(".outer").hide();
+            $(".inner").hide();
             $(".CTATProtractor--label90").hide();
         }
     }

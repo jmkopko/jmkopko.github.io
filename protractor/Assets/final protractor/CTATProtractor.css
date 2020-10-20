@@ -4,8 +4,12 @@
 
 .CTATProtractor {
   border: 2px solid cornflowerblue;
-  height: 400px;
-  width: 800px;
+  height: auto;
+  min-height: 200px;
+  min-width: 200px;
+  max-width: 1000px;
+  width: auto;
+  flex-grow: 2;
 }
 
 .CTATProtractor--container {
