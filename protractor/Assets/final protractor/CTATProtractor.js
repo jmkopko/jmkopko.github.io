@@ -69,55 +69,65 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         this.bd; // this corresponds to the base degree system, as well as angle ?BD for this protractor
         var self = this;  // used in animation callback for setPoint.
         this.scalefactor;   //scale factor needed to make arrowheads scale with size
+        this.df;  // document fragment for creation.
+
+        this.renderProtRay = function () {
+            this.scalefactor = self.protractor.magnitude/320;
+            
+            this.label.setAttributeNS(null, 'x', this.x + self.protractor.magnitude * .09);
+            this.label.setAttributeNS(null, 'y', this.y);
+
+            this.ray.setAttributeNS(null, 'x1', self.protractor.origin.x);
+            this.ray.setAttributeNS(null, 'y1', self.protractor.origin.y);
+            this.ray.setAttributeNS(null, 'x2', this.x);
+            this.ray.setAttributeNS(null, 'y2', this.y);
+
+            this.point.setAttributeNS(null, 'cx', this.x);
+            this.point.setAttributeNS(null, 'cy', this.y);
+            this.point.setAttributeNS(null, 'r', 3 + 3*this.scalefactor);
+
+            this.arrow.setAttributeNS(null, 'points', this.x+","+this.y+" "+(this.x+5*this.scalefactor)+","+(this.y+3*this.scalefactor)+" "+this.x+","+(this.y-10*this.scalefactor)+" "+(this.x-5*this.scalefactor)+","+(this.y+3*this.scalefactor));
+        }
 
         this.createProtRay = function () {
             // this creates the necessary svg elements, adds them to the canvas and gives their refs to ProtRay object
             this.scalefactor = self.protractor.magnitude/320;
+            this.df = document.createDocumentFragment();
+            
 
             label = document.createElementNS(svgNS, "text");
-            label.setAttributeNS(null, 'x', this.x + self.protractor.magnitude * .09);
-            label.setAttributeNS(null, 'y', this.y);
             label.classList.add("CTATProtractor--labelray");
             label.appendChild(document.createTextNode(this.name));
 
             ray = document.createElementNS(svgNS, "line");
             ray.setAttributeNS(null, 'id', 'ray_' + this.name);
-            ray.setAttributeNS(null, 'x1', self.protractor.origin.x);
-            ray.setAttributeNS(null, 'y1', self.protractor.origin.y);
-            ray.setAttributeNS(null, 'x2', this.x);
-            ray.setAttributeNS(null, 'y2', this.y);
-
 
             point = document.createElementNS(svgNS, "circle");
             point.setAttributeNS(null, 'id', 'point_' + this.name);
-            point.setAttributeNS(null, 'cx', this.x);
-            point.setAttributeNS(null, 'cy', this.y);
-            point.setAttributeNS(null, 'r', 3 + 3*this.scalefactor);
 
             arrow = document.createElementNS(svgNS, "polygon");
             arrow.setAttributeNS(null, 'id', 'arrow_' + this.name);
-            arrow.setAttributeNS(null, 'points', this.x+","+this.y+" "+(this.x+5*this.scalefactor)+","+(this.y+3*this.scalefactor)+" "+this.x+","+(this.y-10*this.scalefactor)+" "+(this.x-5*this.scalefactor)+","+(this.y+3*this.scalefactor));
 
             self.point = point;
             self.ray = ray;
             self.label = label;
             self.arrow = arrow;
-            
+
+            this.renderProtRay();
+
+            this.df.appendChild(label);
+            this.df.appendChild(ray);
+            this.df.appendChild(arrow);
+            this.df.appendChild(point);
         }
         this.createProtRay();  // call it on object instantiation
 
         this.drawProtRay = function () {
             if (this.move) {
                 this.point.classList.add("CTATProtractor--select");
-                self.protractor._protrays.append(this.label);
-                self.protractor._protrays.append(this.ray);
-                self.protractor._protrays.append(this.arrow);
-                self.protractor._protrays.append(this.point);
+                self.protractor._protrays.append(this.df);
             } else {
-                self.protractor._fgrays.append(this.label);
-                self.protractor._fgrays.append(this.ray);
-                self.protractor._fgrays.append(this.arrow);
-                self.protractor._fgrays.append(this.point);
+                self.protractor._fgrays.append(this.df);
             }
             this.bd = this.getAngle();
         }
@@ -354,44 +364,59 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
     */
     this.getConfigurationActions = function () {
         var actions = [];
+        var sai;
         var $div = $(this.getDivWrap());
         if ($div.attr('data-ctat-protrays')) {
-            var sai = new CTATSAI();
+            sai = new CTATSAI();
             sai.setSelection(this.getName());
             sai.setAction('setProtrays');
             sai.setInput($div.attr('data-ctat-protrays'));
             actions.push(sai);
         }
+        if ($div.attr('data-ctat-interactive-points')) {
+            sai = new CTATSAI();
+            sai.setSelection(this.getName());
+            sai.setAction('setInteractivePoints');
+            sai.setInput($div.attr('data-ctat-interactive-points'));
+            actions.push(sai);
+        }
+        if ($div.attr('data-ctat-base-points')) {
+            sai = new CTATSAI();
+            sai.setSelection(this.getName());
+            sai.setAction('setBasePoints');
+            sai.setInput($div.attr('data-ctat-base-points'));
+            actions.push(sai);
+        }
         if ($div.attr('data-ctat-outer-labels')) {
-            var sai = new CTATSAI();
+            sai = new CTATSAI();
             sai.setSelection(this.getName());
             sai.setAction('setOuterLabels');
             sai.setInput($div.attr('data-ctat-outer-labels'));
             actions.push(sai);
         }
         if ($div.attr('data-ctat-inner-labels')) {
-            var sai = new CTATSAI();
+            sai = new CTATSAI();
             sai.setSelection(this.getName());
             sai.setAction('setInnerLabels');
             sai.setInput($div.attr('data-ctat-inner-labels'));
             actions.push(sai);
         }
         if ($div.attr('data-ctat-radians')) {
-            var sai = new CTATSAI();
+            sai = new CTATSAI();
             sai.setSelection(this.getName());
             sai.setAction('setRadians');
             sai.setInput($div.attr('data-ctat-radians'));
             actions.push(sai);
         }
         if ($div.attr('data-ctat-interval')) {
-            var sai = new CTATSAI();
+            sai = new CTATSAI();
             sai.setSelection(this.getName());
             sai.setAction('setInterval');
             sai.setInput($div.attr('data-ctat-interval'));
             actions.push(sai);
         }
         if ($div.attr('data-ctat-snap')) {
-            var sai = new CTATSAI();
+            sai = new CTATSAI();
             sai.setSelection(this.getName());
             sai.setAction('setSnap');
             sai.setInput($div.attr('data-ctat-snap'));
@@ -409,6 +434,28 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
     }
     this.setParameterHandler('protrays', this.setProtrays);
     this.data_ctat_handlers['protrays'] = this.setProtrays;
+
+    this.setInteractivePoints = function (pointString) {
+        this.interactivePointString = pointString;
+        var numPoints = pointString.length;
+
+        for(i=0; i<numPoints; i++) {
+            this.interactivePoints[pointString.charAt(i)] = null;
+        }  
+    }
+    this.setParameterHandler('interactivePoints', this.setInteractivePoints);
+    this.data_ctat_handlers['interactivePoints'] = this.setInteractivePoints;
+
+    this.setBasePoints = function (pointString) {
+        this.basePointString = pointString;
+        var numPoints = pointString.length;
+
+        for(i=0; i<numPoints; i++) {
+            this.basePoints[pointString.charAt(i)] = null;
+        }  
+    }
+    this.setParameterHandler('basePoints', this.setBasePoints);
+    this.data_ctat_handlers['basePoints'] = this.setBasePoints;
 
     this.setSnap = function (snapbool) {
         //sets snapping for the protractor
@@ -513,10 +560,11 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
      * CTAT Protractor initialization
      */
     this.init = function () {
+        
         var div = this.getDivWrap();
-
         // Create the SVG element, and add the needed group elements to it.
         this.initSVG();
+        console.log(this.component);
         this.component.classList.add('CTATProtractor--container');
         this._compass = document.createElementNS(svgNS, 'g');
         this._compass.classList.add('CTATProtractor--compass', 'unselectable');
@@ -543,7 +591,9 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         this.drawCompass();
         this.addProtrays(this.numRays);
         this.protRays.forEach(function (item) { item.drawProtRay() })
-        this.initialPositions()
+        this.initialPositions();
+
+        this.initialProtrays();
 
         // Set snapping points in case snaps are turned on.
         this.setSnaps();
@@ -558,14 +608,13 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         this.setComponent(div);
         this.setFontSize();
 
-        console.log("BBOX 2: ");
-        console.log(this.getBoundingBox());
         // finish any initialization here.
         this.setInitialized(true);
         this.addComponentReference(this, div);
     };
 
     this.dimensionalize = function() {
+        //BUG why doesn't get bounding box find the correct flex size?
         let bbox = this.getBoundingBox();
         console.log("BBOX CALL: ");
         console.log(bbox);
@@ -573,7 +622,7 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         this.leftBound = Math.floor(bbox.width * .05);
         this.rightBound = Math.floor(bbox.width * .95);
         this.topBound = Math.floor(bbox.height * .05);
-        this.bottomBound = Math.floor(bbox.width * .95);
+        this.bottomBound = Math.floor(bbox.height * .95);
 
         // Dimension and position the protractor itself within the SVG
         this.magnitude = Math.min(bbox.width * .4, bbox.height * 0.8);
@@ -726,6 +775,20 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
             this.angleABE = Math.abs(startA - startE);
             this.protRays.push(new ProtRay(this, 'E', coordE.x, coordE.y));
         }
+    }
+
+    this.initialProtrays = function() {
+        var numRays = Object.keys(this.interactivePoints);
+        console.log(numRays); 
+        start90 = this.getPointFromAnglitude(90, this.magnitude);
+        
+        var setupFunc = function (value, index, array) {
+            this.interactivePoints[value] = new ProtRay(this, value, start90.x, start90.y);
+        }.bind(this)
+
+        numRays.forEach(setupFunc);
+        
+        Object.values(this.interactivePoints).forEach(function(value){ value.drawProtRay();});
     }
 
     
