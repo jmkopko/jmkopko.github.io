@@ -4,11 +4,14 @@ window.onload = function () {
 
     bangles = this.CTATShellTools.findComponent('angles')[0];
 
-    crayA = bangles.protRays[0];
+    crayD = bangles.interactivePoints['D'];
 
-    crayE = bangles.protRays[3];
+    crayF = bangles.interactivePoints['F'];
 
 
+    cangles = this.CTATShellTools.findComponent('angles-mid')[0];
+
+    dangles = this.CTATShellTools.findComponent('angles-small')[0];
 
 
 

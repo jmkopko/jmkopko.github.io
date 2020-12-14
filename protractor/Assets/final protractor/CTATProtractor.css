@@ -4,17 +4,18 @@
 
 .CTATProtractor {
   border: 2px solid cornflowerblue;
-  height: auto;
-  /* min-height: 200px; */
-  /* min-width: 300px;
-  max-width: 1000px; */
-  width: 100%;
+
+  min-height: 200px;
+  min-width: 400px;
+  max-width: 1000px;
+  max-height: 500px;
+
+  flex: 1;
 }
 
 .CTATProtractor--container {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  height: auto;
+  width: 100%;
 }
 
 .CTATProtractor--compass {
@@ -39,7 +40,7 @@
   font-size: 125%;
 }
 
-.CTATProtractor--labelB {
+.CTATProtractor--label-origin {
   text-anchor: middle;
   font-style: italic;
   stroke: none;

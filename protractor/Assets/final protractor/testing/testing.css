@@ -1,16 +1,28 @@
 #angles {
-  height: 400px;
-  width: 800px;
+  /* height: 400px;
+  width: 800px; */
 }
 
 #angles-mid {
-  height: 200px;
-  width: 400px;
+  /* height: 200px;
+  width: 400px; */
 }
 
 #angles-small {
-  height: 100px;
-  width: 200px;
+  /* height: 100px;
+  width: 200px; */
+}
+
+.CTATProblemSolving {
+  /* height: 800px; */
+  flex-direction: column;
+}
+
+.CTAT-gen-component {
+	/* assume generated component is always within a div and that it should occupy the entire div */
+	/* width: 100%;
+	height: auto; */
+
 }
 
 /* #div_protractor {

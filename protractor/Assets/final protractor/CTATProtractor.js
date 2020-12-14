@@ -14,10 +14,10 @@ goog.require('CTATSAI');
 var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
     CTAT.Component.Base.SVG.call(this, "CTATProtractor", "aProtractor", aDescription, aX, aY, aWidth, aHeight);
     this.magnitude;
-    this.numRays = 1;       //defaults to only one moveable ray A.
+    this.numIntPoints = 1;       //defaults to only one moveable point A.
     this.radians = 0;       //defaults to no radian values.
     this.interval = 15;     //defaults to 15 degree interval.
-    this.snap = false;      //snapping off by default.
+    this.snap = true;      //snapping off by default.
     this.snaps = [];
     this.protRays = [];
     this.origin = { x: null, y: null };
@@ -25,21 +25,27 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
     this.rightBound;
     this.topBound;
     this.bottomBound;
+    this.fadespd = 1000; //fade in/out speed for protray animations
 
     this.basePointString = "OB";
-    this.basePoints = {};
+    this.baseOrigin = "O";  //is the name of the origin point
+    this.basePoints = {};   // only contains up to two base rays
     this.interactivePointString = "A";
     this.interactivePoints = {};
     this.innerLabels = 'none';
     this.outerLabels = "counterclockwise degrees"
 
 
-    //all possible angles in a standard protractor; these angles are explicitly set in addProtrays, and updated in Protray.setPoint
-    this.angleEBD;
-    this.angleABE;
-    this.angleEBC;
-    this.angleABC;
-    this.angleABD;
+    //this is for the chooseAngle method, and also set by setAngle - used in incorrect highlighting?
+    this.chosenAngle;
+    this.chosen = false;
+    this.measureunit = 'degrees';
+    this.precision = 2;
+    this.denominator = null;
+    this.dragOnArc = true;
+
+    this.radsnap = false;
+    this.radsnaps = [];
 
     var svgNS = CTATGlobals.NameSpace.svg;  // convenience reference
     var selectedProtRay; //needed for event handlers
@@ -57,6 +63,11 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
 	 */
 
     function ProtRay(protractor, name, x, y, move = true) {
+
+        //FIXME the old x & y arguments need to be deprecated; since the arrow was added, x and y MUST be the on-arc
+        // point that corresponds to 90 degrees, or the 'top' of the arc.  Otherwise the arrow is broken; requires
+        // refactor to initial points args, render protray - start90 should probably become a protractor property.
+
         this.protractor = protractor;  //Parent CTATProtractor
         this.name = name;
         this.point;     //reference to SVG object at end of ray; 'grabbable' on movable protrays
@@ -65,11 +76,12 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         this.arrow;     //reference to SVG arrow that travels beyond top of this.point
         this.x = x;     // x position of center of this.point for first offset
         this.y = y;     // y position of center of this.point for first offset
-        this.move = move;   //is this a movable protray? (A and E are, C and D are not)
+        this.move = move;   //is this a movable protray?
         this.bd; // this corresponds to the base degree system, as well as angle ?BD for this protractor
         var self = this;  // used in animation callback for setPoint.
         this.scalefactor;   //scale factor needed to make arrowheads scale with size
         this.df;  // document fragment for creation.
+        this.hidden = false; //boolean to determine if a protray is currently hidden.
 
         this.renderProtRay = function () {
             this.scalefactor = self.protractor.magnitude/320;
@@ -89,6 +101,17 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
             this.arrow.setAttributeNS(null, 'points', this.x+","+this.y+" "+(this.x+5*this.scalefactor)+","+(this.y+3*this.scalefactor)+" "+this.x+","+(this.y-10*this.scalefactor)+" "+(this.x-5*this.scalefactor)+","+(this.y+3*this.scalefactor));
         }
 
+        this.rerenderProtray = function () {
+            start90 = this.protractor.getPointFromAnglitude(90, this.protractor.magnitude);
+            this.x = start90.x;
+            this.y = start90.y;
+
+            this.renderProtRay();
+
+            this.moveTo(this.protractor.getPointFromAnglitude(this.bd, this.protractor.magnitude));
+
+        }
+
         this.createProtRay = function () {
             // this creates the necessary svg elements, adds them to the canvas and gives their refs to ProtRay object
             this.scalefactor = self.protractor.magnitude/320;
@@ -97,6 +120,7 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
 
             label = document.createElementNS(svgNS, "text");
             label.classList.add("CTATProtractor--labelray");
+            label.setAttributeNS(null, 'id', 'label_' + this.name);
             label.appendChild(document.createTextNode(this.name));
 
             ray = document.createElementNS(svgNS, "line");
@@ -170,7 +194,14 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
 
             //label needs to change which side of the marker its on
             if(this.move) {
-                this.label.setAttributeNS(null, 'y', coord.y);
+                
+
+                if(move_angle < 60 || move_angle > 120) {
+                    this.label.setAttributeNS(null, 'y', coord.y * 1.1);
+                } else {
+                    this.label.setAttributeNS(null, 'y', coord.y);
+                }
+
                 if (coord.x >= this.protractor.origin.x) {
                     this.label.setAttributeNS(null, 'x', coord.x + self.protractor.magnitude * .07);
                 } else {
@@ -182,7 +213,6 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
             }
 
             this.bd = this.getAngle();
-            this.reportAngles(this.bd);
         }
 
 
@@ -225,6 +255,13 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
 
         this.differentialProtrayMove = function (oppProtray, set_angle) {
 
+            //TODO need to examine case of negative values, and make sure it doesn't error
+
+            if(!this.move) {
+                console.error("Ray \""+this.name+"\" is a non-moving base ray, so should not move.");
+                return false;
+            }
+
             var currentDiff = this.bd - oppProtray.bd;
             var moveAngle = set_angle - Math.abs(currentDiff);
 
@@ -238,7 +275,7 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
                     if (newAngle < 0 || newAngle > 180) {
                         newAngle = oppProtray.bd + moveAngle;
                         if (newAngle < 0 || newAngle > 180) {
-                            console.log("New angle ABE not possible with Ray " + this.name);
+                            console.log("New angle not possible with Ray " + this.name);
                             return false;
                         }
                     }
@@ -247,7 +284,7 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
                     if (newAngle < 0 || newAngle > 180) {
                         newAngle = oppProtray.bd - moveAngle;
                         if (newAngle < 0 || newAngle > 180) {
-                            console.log("New angle ABE not possible with Ray " + this.name);
+                            console.log("New angle not possible with Ray " + this.name);
                             return false;
                         }
                     }
@@ -257,31 +294,6 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
             this.setPoint(newAngle);
             return true;
 
-        }
-
-        /* Protray Movement helper functions */
-
-        this.getOpp = function () {
-            // only for the 2 protractor solution, not designed for custom names/protrays
-            var opp;
-            this.name === "A" ? opp = "E" : opp = "A";
-            return this.protractor.findProtray(opp);
-        }
-
-        this.reportAngles = function (finalAngle) {
-            // report the angle to the parent protractor
-            if (this.name === "A") {
-                this.protractor.angleABD = finalAngle;
-                this.protractor.angleABC = 180 - finalAngle;
-                if (this.protractor.numRays > 2) {
-                    this.protractor.angleABE = Math.abs(finalAngle - this.getOpp().bd);
-                }
-
-            } else if (this.name === "E") {
-                this.protractor.angleEBD = finalAngle;
-                this.protractor.angleEBC = 180 - finalAngle;
-                this.protractor.angleABE = Math.abs(finalAngle - this.getOpp().bd);
-            }
         }
 
 
@@ -296,19 +308,24 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         }
 
 
-        // This generates the Input value for the "SpecifiedAngleSet" Action
+        // This generates the Input value for the "setAngle" Action
         this.genInput = function () {
-            var protrays = this.protractor.protRays.length;
-
             var input = {};
-            input[this.name + "BC"] = Math.round(180 - this.bd);
-            if (protrays > 2) {
-                input[this.name + "BD"] = Math.round(this.bd);
+
+            function buildInput(value) {
+                if(value.name != self.name) {
+                    rep_value = Math.abs(Math.floor(self.bd - value.bd));
+
+                    if(!self.protractor.measureunit.includes("deg")){
+                        rep_value = self.protractor.convertUnits(rep_value);
+                    }
+                    input[self.name+self.protractor.baseOrigin+value.name] = rep_value;
+                }
             }
-            if (protrays > 3) {
-                opp = this.getOpp();
-                input[this.name + 'B' + opp.name] = Math.round(Math.abs(this.bd - opp.bd));
-            }
+            
+            Object.values(this.protractor.basePoints).forEach(buildInput);
+            Object.values(this.protractor.interactivePoints).forEach(buildInput);
+
             return input;
         }
 
@@ -322,6 +339,42 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         this.reactivateProtRay = function () {
             this.point.classList.remove('unselectable');
             this.point.classList.add('CTATProtractor--select');
+        }
+
+        this.hideProtRay = function () {
+            this.deactivateProtRay();
+            $('#point_' + this.name).hide();
+            $('#label_' + this.name).hide();
+            $('#ray_' + this.name).hide();
+            $('#arrow_' + this.name).hide();
+            this.hidden = true;
+        }
+
+        this.showProtRay = function () {
+            this.reactivateProtRay();
+            $('#point_' + this.name).show();
+            $('#label_' + this.name).show();
+            $('#ray_' + this.name).show();
+            $('#arrow_' + this.name).show();
+            this.hidden = false;
+        }
+
+        this.fadeOutProtRay = function () {
+            this.deactivateProtRay();
+            $('#point_' + this.name).fadeOut(this.protractor.fadespd);
+            $('#label_' + this.name).fadeOut(this.protractor.fadespd);
+            $('#ray_' + this.name).fadeOut(this.protractor.fadespd);
+            $('#arrow_' + this.name).fadeOut(this.protractor.fadespd);
+            this.hidden = true;
+        }
+
+        this.fadeInProtRay = function () {
+            this.reactivateProtRay();
+            $('#point_' + this.name).fadeIn(this.protractor.fadespd);
+            $('#label_' + this.name).fadeIn(this.protractor.fadespd);
+            $('#ray_' + this.name).fadeIn(this.protractor.fadespd);
+            $('#arrow_' + this.name).fadeIn(this.protractor.fadespd);
+            this.hidden = false;
         }
 
         this.styleCorrect = function () {
@@ -366,13 +419,6 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         var actions = [];
         var sai;
         var $div = $(this.getDivWrap());
-        if ($div.attr('data-ctat-protrays')) {
-            sai = new CTATSAI();
-            sai.setSelection(this.getName());
-            sai.setAction('setProtrays');
-            sai.setInput($div.attr('data-ctat-protrays'));
-            actions.push(sai);
-        }
         if ($div.attr('data-ctat-interactive-points')) {
             sai = new CTATSAI();
             sai.setSelection(this.getName());
@@ -401,11 +447,18 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
             sai.setInput($div.attr('data-ctat-inner-labels'));
             actions.push(sai);
         }
-        if ($div.attr('data-ctat-radians')) {
+        if ($div.attr('data-ctat-unit-of-measure')) {
             sai = new CTATSAI();
             sai.setSelection(this.getName());
-            sai.setAction('setRadians');
-            sai.setInput($div.attr('data-ctat-radians'));
+            sai.setAction('setUOM');
+            sai.setInput($div.attr('data-ctat-unit-of-measure'));
+            actions.push(sai);
+        }
+        if ($div.attr('data-ctat-set-precision')) {
+            sai = new CTATSAI();
+            sai.setSelection(this.getName());
+            sai.setAction('setRadPrecision');
+            sai.setInput($div.attr('data-ctat-set-precision'));
             actions.push(sai);
         }
         if ($div.attr('data-ctat-interval')) {
@@ -422,46 +475,67 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
             sai.setInput($div.attr('data-ctat-snap'));
             actions.push(sai);
         }
+        if ($div.attr('data-ctat-drag-on-arc')) {
+            sai = new CTATSAI();
+            sai.setSelection(this.getName());
+            sai.setAction('setDragOnArc');
+            sai.setInput($div.attr('data-ctat-drag-on-arc'));
+            actions.push(sai);
+        }
+
+        // actions.forEach(function(value) {console.log(value.getAction() + ": "+ value.getInput())})
+
         return actions;
     };
 
-    this.setProtrays = function (numRays) {
-        this.numRays = numRays;
-        // 0 only gives ray A
-        // 1 gives A and C
-        // 2 gives A C D
-        // 3+ gives ACDE
-    }
-    this.setParameterHandler('protrays', this.setProtrays);
-    this.data_ctat_handlers['protrays'] = this.setProtrays;
 
     this.setInteractivePoints = function (pointString) {
         this.interactivePointString = pointString;
         var numPoints = pointString.length;
-
-        for(i=0; i<numPoints; i++) {
-            this.interactivePoints[pointString.charAt(i)] = null;
-        }  
+        this.numIntPoints = numPoints;
     }
     this.setParameterHandler('interactivePoints', this.setInteractivePoints);
     this.data_ctat_handlers['interactivePoints'] = this.setInteractivePoints;
 
     this.setBasePoints = function (pointString) {
         this.basePointString = pointString;
-        var numPoints = pointString.length;
-
-        for(i=0; i<numPoints; i++) {
-            this.basePoints[pointString.charAt(i)] = null;
-        }  
     }
     this.setParameterHandler('basePoints', this.setBasePoints);
     this.data_ctat_handlers['basePoints'] = this.setBasePoints;
 
+    this.setUOM = function (measureunit) {
+        console.trace("UOM BEing set:" + measureunit);
+        //sets snapping for the protractor
+        if (measureunit.includes("rad")) {
+            this.measureunit = "rad";
+            this.radsnap = true;
+        } else if (measureunit.includes("frac")) {
+            this.measureunit = "frac";
+            this.radsnap = true;
+        }
+    }
+    this.setParameterHandler('unitOfMeasure', this.setUOM);
+    this.data_ctat_handlers['unitOfMeasure'] = this.setUOM;
+
+    this.setRadPrecision = function (precision) {
+        //sets sig digits for radian values (default 2) or fractional radian denominator.
+        
+        if(this.measureunit.includes("frac")){
+            this.denominator = precision
+        } else {
+            this.precision = precision
+        }
+
+    }
+    this.setParameterHandler('precision', this.setRadPrecision);
+    this.data_ctat_handlers['precision'] = this.setRadPrecision;
+
     this.setSnap = function (snapbool) {
         //sets snapping for the protractor
-        if (snapbool == "true") {
-            this.snap = true;
+        if(!snapbool){
+            this.snap = false;
         }
+
     }
     this.setParameterHandler('snap', this.setSnap);
     this.data_ctat_handlers['snap'] = this.setSnap;
@@ -479,15 +553,13 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
     this.data_ctat_handlers['interval'] = this.setInterval;
 
 
-    this.setRadians = function (radcode) {
-        this.radians = radcode;
-        // 0 is degrees
-        // 1 sets label set 1 to radians 
-        // 2 sets label set 2 to radians
-        // 3 sets both to radians
+    this.setDragOnArc = function (dragonset) {
+        //sets snapping for the protractor
+            this.dragOnArc = dragonset;
+
     }
-    this.setParameterHandler('radians', this.setRadians);
-    this.data_ctat_handlers['radians'] = this.setRadians;
+    this.setParameterHandler('dragOnArc', this.setDragOnArc);
+    this.data_ctat_handlers['dragOnArc'] = this.setDragOnArc;
 
 
     /*************** Event Handlers ******************/
@@ -510,6 +582,10 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
 
             if (this.snap) {
                 selectedProtRay.moveTo(this.getClosestSnap(coord));
+            } else if (this.radsnap) {
+                selectedProtRay.moveTo(this.getClosestSnap(coord, true));
+            } else if (this.dragOnArc) {
+                selectedProtRay.moveTo(this.getPointFromAnglitude(this.calcAngle(coord), this.magnitude));
             } else {
                 selectedProtRay.moveTo(coord);
             }
@@ -523,15 +599,27 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
 
             if (this.snap) {
                 coord = this.getClosestSnap(coord);
+            } else if (this.radsnap) {
+                coord = this.getClosestSnap(coord, true);
             }
             var new_angle = Math.round(this.calcAngle(coord));
             selectedProtRay.setPoint(new_angle);
 
             sas_input = selectedProtRay.genInput();
 
-            sas_newinput = JSON.stringify(sas_input);
-
-            this.setActionInput("SpecifiedAngleSet", sas_newinput);
+            //have to handle possibility of chooseAngle
+            var action_input;
+            if(this.chosen) {
+                if(sas_input[this.chosenAngle]) {
+                    action_input = sas_input[this.chosenAngle]
+                } else if (sas_input[this.chosenAngle.charAt(2)+this.chosenAngle.charAt(1)+this.chosenAngle.charAt(0)]) {
+                    action_input = sas_input[this.chosenAngle.charAt(2)+this.chosenAngle.charAt(1)+this.chosenAngle.charAt(0)]
+                }
+            } else {
+                action_input = JSON.stringify(sas_input).slice(1,-1);
+            }
+            
+            this.setActionInput("setAngle", action_input);
             this.processAction();
 
             selectedProtRay = null;
@@ -550,7 +638,7 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
 
     this.removeRayStyles = function () {
         // runs during handle-drag start to remove certain highlights.
-        this.protRays.forEach(function (item) {
+        Object.values(this.interactivePoints).forEach(function (item) {
             item.deStyle();
         });
     }
@@ -564,21 +652,23 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         var div = this.getDivWrap();
         // Create the SVG element, and add the needed group elements to it.
         this.initSVG();
-        console.log(this.component);
+        console.info(this.component);
         this.component.classList.add('CTATProtractor--container');
         this._compass = document.createElementNS(svgNS, 'g');
         this._compass.classList.add('CTATProtractor--compass', 'unselectable');
         this._labels = document.createElementNS(svgNS, 'g');
         this._labels.classList.add('CTATProtractor--labels', 'unselectable');
-        this._protrays = document.createElementNS(svgNS, 'g');
-        this._protrays.classList.add('CTATProtractor--protrays');
         this._fgrays = document.createElementNS(svgNS, 'g');
         this._fgrays.classList.add('CTATProtractor--fgrays', 'unselectable');
+        this._protrays = document.createElementNS(svgNS, 'g');
+        this._protrays.classList.add('CTATProtractor--protrays');
 
         this.component.appendChild(this._compass);
         this.component.appendChild(this._labels);
-        this.component.appendChild(this._protrays);
         this.component.appendChild(this._fgrays);
+        this.component.appendChild(this._protrays);
+
+
 
         // Add the event listeners.
         this.component.addEventListener('mousedown', handle_drag_start);
@@ -589,35 +679,38 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
 
         // Draw the protractor, create protrays based on the initial elements, and add them to the SVG.
         this.drawCompass();
-        this.addProtrays(this.numRays);
-        this.protRays.forEach(function (item) { item.drawProtRay() })
+
+        this.initialBasePoints();
+
+        this.initialInteractivePoints();
         this.initialPositions();
 
-        this.initialProtrays();
+        this.checkSingleAngleMode();
 
-        // Set snapping points in case snaps are turned on.
+        // Set snapping points in case snapping turned on.
         this.setSnaps();
+        this.setRadSnaps();
 
         // Draw the labels 
-        this.drawLabelB();
+        this.drawOriginLabel();
         this.drawLabels();
 
         // console.log("CTAT Protractor object on next line"); //DBG final protractor object
         // console.log(this);
+        this.component.setAttributeNS(null, "viewBox", "0,0,800,400");
+        this.component.setAttributeNS(null, "preserveAspectRatio", "xMidYMid meet");
 
         this.setComponent(div);
-        this.setFontSize();
+
 
         // finish any initialization here.
         this.setInitialized(true);
         this.addComponentReference(this, div);
     };
 
-    this.dimensionalize = function() {
-        //BUG why doesn't get bounding box find the correct flex size?
+    this.oldDimensionalize = function() {
+        //this was the original dimensionalizing function when there was no viewbox.
         let bbox = this.getBoundingBox();
-        console.log("BBOX CALL: ");
-        console.log(bbox);
 
         this.leftBound = Math.floor(bbox.width * .05);
         this.rightBound = Math.floor(bbox.width * .95);
@@ -630,156 +723,119 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         this.origin.y = bbox.height / 2 + this.magnitude / 2;
     }
 
+    this.dimensionalize = function() {
+        // this was created when switching to a preserve aspect ratio/viewbox SVG scaling scheme
+        let bbox = {"width":800, "height":400};
+
+        console.log(bbox);
+
+        this.leftBound = 10;
+        this.rightBound = 790;
+        this.topBound = 10;
+        this.bottomBound = 390;
+
+        // Dimension and position the protractor itself within the SVG
+        this.magnitude = Math.min(bbox.width * .4, bbox.height * 0.8);
+        this.origin.x = bbox.width / 2;
+        this.origin.y = bbox.height / 2 + this.magnitude / 2;
+
+        this.setFontSize();
+    }
+
     /**
-     * SpecifiedAngleSet
+     * setAngle
      * Primary action for the CTATProtractor, defines moving protrays around the interface and setting them
      * at a particular angle. 
      * 
-     * @param {JSON} JSONangles	A specifically formatted string of a JS object where the key is the angle name, and the value is the angle measure.
+     * @param {String} notJSONangles	A specifically formatted string of a JS object without parenthesis, where the key is the angle name, and the value is the angle measure.
      * 
-     * JSONangles specifies up to 3 angles for each protray:
-     * {"ABC": degree, "ABD": degree, "ABE": degree}
+     * notJSONangles specifies angles for each protray, e.g.:
+     * "ABC": degree, "ABD": degree, "ABE": degree
      * A: ABC, ABD, ABE
      * B: EBC, EBD, ABE
      * 
-     * When generated from the interface, JSONangles will contain 2 or 3 of the angles desired.
+     * When generated from the interface, JSONangles will contain all of the angles desired.
      * When matching for correctness, only the first angle specified will be considered.
+     * 
+     * When there are only two rays in the protractor (a base and an interactive), specified by this.chosen, setAngle
+     * operates on only an integer input (the value of that angle in degrees)
      */
 
-    this.SpecifiedAngleSet = function (JSONangles) {
 
+    this.setAngle = function (notJSONangles) {
+
+        var JSONangles = "{"+notJSONangles+"}";
         var selectedProtRay;  // Protray object being moved/set
-        var selectedKey;      // Key of object being moved/set (either "A" or "E")
-        var oppKey;           // Key of protray opposite the protray being moved/set (either "A" or "E", opposite of selectedKey)
+        var selectedKey;      // Key/name of object being moved/set
+        var oppKey;           // Key/name of protray opposite the protray being moved/set
+        var oppRay;           // Protray opposite the protray being moved/set
 
-        //TODO consider separate processInputString for SpecifiedAngleSet AND hint/error/correct hightlighting
+        console.log(JSONangles);
 
-        // If only a number is passed, it will move Protray A/angle ABC only.
-        if (!isNaN(parseInt(JSONangles))) {
-            specified_angle = parseInt(JSONangles);
-            selectedProtRay = this.protRays[0];
-            selectedProtRay.setPoint(180 - specified_angle);
-            return;
+        //grab the first letter of the first angle specified in the JSON input; designates the targeted protray.
+        if(this.chosen) {
+            selectedKey = this.chosenAngle.charAt(0)
+            oppKey = this.chosenAngle.charAt(0)
         } else {
             specified_angles = JSON.parse(JSONangles);
-        }
-
-        // If protray E is not in the protractor, automatically select A.
-        if (this.protRays.length < 3) {
-            selectedProtRay = this.protRays[0];
-            selectedKey = "A";
-        } else {
-            //grab the first letter of the first angle specified in the JSON input; designates the targeted protray.
             selectedKey = Object.keys(specified_angles)[0][0];
-            if (selectedKey == "A") {
-                selectedProtRay = this.findProtray("A");
-                oppKey = "E";
-            } else if (selectedKey == "E") {
-                selectedProtRay = this.findProtray("E");
-                oppKey = "A";
-            } else {
-                console.log("Improper angle name passed to SpecifiedAngleSet!"); console.log(JSONangles); return;
-            }
+            oppKey = Object.keys(specified_angles)[0][2];
         }
 
-        var targetedAngle;
-        //iterate through each possible key, starting with ?BC -> ?BD -> ?B?, and move based on that.
-        // we test for null in each case to help with correct highlighting -
-        //      Correct highlighting works based on "replace student input with..." a specific angle measure.
-        //      If we merely want to check if a value is in range, but not move it from the student's position afterward,
-        //      we pass 'null' as the value of the angle we are concerned with.  Otherwise it will just default to 
-        //      ?BC of whatever protray was moved.
+        selectedProtRay = this.findProtray(selectedKey);
+        oppRay = this.findProtray(oppKey);
 
-        if (specified_angles[selectedKey + "BC"]) {
-            targetedAngle = selectedKey + "BC";
-            if (specified_angles[targetedAngle] != null) {
-                selectedProtRay.setPoint(180 - specified_angles[selectedKey + "BC"]);
-            } else {
-                console.log('ABC null return');
-                return;
-            }
+        targetAngleName = selectedKey + this.baseOrigin + oppKey;
 
-        } else if (specified_angles[selectedKey + "BD"]) {
-            targetedAngle = selectedKey + "BD";
-            if (specified_angles[targetedAngle] != null) {
-                selectedProtRay.setPoint(specified_angles[selectedKey + "BD"]);
-
-            } else {
-                return;
-            }
-
-        } else if (specified_angles[selectedKey + "B" + oppKey]) {
-            // The angle is actually defined as "ABE" in the protractor object, but which protray moves depends on the first letter passed.
-            targetedAngle = selectedKey + "B" + oppKey;
-            if (specified_angles[targetedAngle] != null) {
-                selectedProtRay.differentialProtrayMove(this.findProtray(oppKey), specified_angles[selectedKey + "B" + oppKey]);
-            } else {
-                return;
-            }
-
+        if(this.chosen) {
+            targetAngle = notJSONangles;
         } else {
-            console.log("Improper or null arguments passed to SpecifiedAngleSet.");  //DBG specified angle set bottom-out failure
-            console.log("Argument passed: " + JSONangles);
-            // console.log(specified_angles);
-            // console.log(selectedKey);
-            // console.log(Object.keys(specified_angles));
-            // console.log(Object.keys(specified_angles)[0]);
-            // console.log(Object.keys(specified_angles)[0][0]);
+            targetAngle = specified_angles[targetAngleName];
         }
+
+
+        if(targetAngle != null) {
+            if(!this.measureunit.contains("deg")){
+                targetAngle = this.convertToDegrees(targetAngle);
+            }
+            selectedProtRay.differentialProtrayMove(oppRay, targetAngle);
+        } else {
+            return;
+        }
+        
     };
 
-    this.findProtray = function (name) {
-        // utility function to find a protray object by giving its name as a string
-        var protray;
-        this.protRays.forEach(function (item) {
-            if (item.name === name) {
-                protray = item;
+    this.chooseAngle = function (angleName) {
+        // Changes the protractor to "chosen" mode, where setAngle SAIs will now only produce numbers for
+        // the single angle that has been chosen.
+        this.chosenAngle = angleName;
+        this.chosen = true;
+    }
+
+    this.findProtray = function(name) {
+        if(this.interactivePoints[name]) {
+            return this.interactivePoints[name];
+        } else if (this.basePoints[name]) {
+            return this.basePoints[name];
+        } else {
+            console.error("Point/Ray not found! Name: "+name);
+        }
+    }
+
+
+    this.initialInteractivePoints = function() {
+
+        // this error check has to happen to remove redundant names; otherwise, redundant names will break point hiding/locking
+        for(i=0; i<this.numIntPoints; i++) {
+            if(this.basePointString.includes(this.interactivePointString.charAt(i))){
+                console.error("Interactive point \""+this.interactivePointString.charAt(i)+"\" in CTATProtractor \""+this.getDivWrap().id+"\" is already a base point; choose unique names for all points!");
+            } else {
+                this.interactivePoints[this.interactivePointString.charAt(i)] = null;
             }
-        });
-
-        // potential error here if there's multiple protrays with same name.
-        // not doing this right now since protrays aren't added by user, but if they can be created, need to guarantee names aren't repeated.
-        return protray;
-    }
-
-    this.addProtrays = function (numRays) {
-        // this runs on init, based on the value set in data-ctat-protrays
-        // 0 only gives ray A
-        // 1 gives A and C
-        // 2 gives A C D
-        // 3+ gives ACDE
-
-        // always draw A at least, so there's something in the interface.
-        var startA = 90;
-        let coordA = this.getPointFromAnglitude(startA, this.magnitude);
-        this.angleABD = startA;
-        this.angleABC = 180 - startA;
-        this.protRays.push(new ProtRay(this, 'A', coordA.x, coordA.y));
-
-        if (numRays > 0) {
-            let coordC = this.getPointFromAnglitude(90, this.magnitude);
-            this.protRays.push(new ProtRay(this, 'C', coordC.x, coordC.y, false));
+            
         }
 
-        // allows for the second 'base' ray, like point D, that is unmovable but gives rise to angles ?BD.
-        if (numRays > 1) {
-            let coordD = this.getPointFromAnglitude(90, this.magnitude);
-            this.protRays.push(new ProtRay(this, 'D', coordD.x, coordD.y, false));
-        }
-
-        if (numRays > 2) {
-            var startE = 90
-            let coordE = this.getPointFromAnglitude(startE, this.magnitude);
-            this.angleEBD = startE;
-            this.angleEBC = 180 - startE;
-            this.angleABE = Math.abs(startA - startE);
-            this.protRays.push(new ProtRay(this, 'E', coordE.x, coordE.y));
-        }
-    }
-
-    this.initialProtrays = function() {
         var numRays = Object.keys(this.interactivePoints);
-        console.log(numRays); 
         start90 = this.getPointFromAnglitude(90, this.magnitude);
         
         var setupFunc = function (value, index, array) {
@@ -791,89 +847,95 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         Object.values(this.interactivePoints).forEach(function(value){ value.drawProtRay();});
     }
 
-    
-
     this.initialPositions = function() {
-        //temporary function until we figure out what new ray generation will look like
-        numRays = this.numRays;
-
-        this.findProtray("A").moveTo(this.getPointFromAnglitude(135, this.magnitude));
-
-        if (numRays > 0) {
-            this.findProtray("C").moveTo(this.getPointFromAnglitude(180, this.magnitude));
+        //sets initial positions for rays, equal spacing from origin.
+        intrv = Math.floor(180/(this.numIntPoints+1));
+        if(intrv%2 === 1){
         }
+        start = intrv;
+        self = this;
 
-        // allows for the second 'base' ray, like point D, that is unmovable but gives rise to angles ?BD.
-        if (numRays > 1) {
-            this.findProtray("D").moveTo(this.getPointFromAnglitude(0, this.magnitude));
-        }
+        Object.values(this.interactivePoints).forEach(function(value){ 
+            value.moveTo(self.getPointFromAnglitude(start, self.magnitude));
+            start += intrv;
+        });
 
-        if (numRays > 2) {
-            this.findProtray("E").moveTo(this.getPointFromAnglitude(45, this.magnitude));
-        }
     }
 
-    this.addRays = function (numRays) {
+    this.initialBasePoints = function() {
+        var numPoints = this.basePointString.length;
 
+        if(numPoints <= 0) {
+            return;
+        } else {
+            this.baseOrigin = this.basePointString.charAt(0);
+            if(numPoints < 2) {
+                return;
+            }
+        }
+
+        start90 = this.getPointFromAnglitude(90, this.magnitude);
+
+        if(numPoints>1) {
+            point_name = this.basePointString.charAt(1);
+            this.basePoints[point_name] = new ProtRay(this, point_name, start90.x, start90.y, false);
+            this.basePoints[point_name].drawProtRay();
+            this.basePoints[point_name].moveTo(this.getPointFromAnglitude(180,this.magnitude));
+        }
+
+        if(numPoints>2) {
+            // error check for duplicate names 
+            if(this.basePointString.charAt(1) === this.basePointString.charAt(2)) {
+                console.warn("Duplicate names for base points in CTATProtractor \""+ this.getDivWrap().id+"\"; please check your data-ctat-base-points property.");
+                this.basePointString = this.basePointString.slice(0,2);
+                return;
+            } else {
+                point_name = this.basePointString.charAt(2);
+                this.basePoints[point_name] = new ProtRay(this, point_name, start90.x, start90.y, false);
+                this.basePoints[point_name].drawProtRay();
+                this.basePoints[point_name].moveTo(this.getPointFromAnglitude(0,this.magnitude));
+            }
+            
+        }
+
+    }
+
+    this.checkSingleAngleMode = function () {
+        // if there is only a single interactive ray and a single base ray, switch to chooseAngle mode
+        if(Object.keys(this.interactivePoints).length === 1 && Object.keys(this.basePoints).length === 1) {
+            this.chooseAngle(this.interactivePointString + this.basePointString);
+        } 
     }
 
     /*************** Drawing ***************/
 
     this.render = function() {
+
+        // Re-renders the protractor with all current settings; not currently used in any other procedures
+
         // have to draw compass, labels, ticks, and rays with current position.
-        var div = this.getDivWrap();
-
-
         // Dimension the SVG based on its parent size.
-        let bbox = this.getBoundingBox();
+        this.dimensionalize();
 
-        this.leftBound = Math.floor(bbox.width * .05);
-        this.rightBound = Math.floor(bbox.width * .95);
-        this.topBound = Math.floor(bbox.height * .05);
-        this.bottomBound = Math.floor(bbox.width * .95);
-
-        // Dimension and position the protractor itself within the SVG
-        this.magnitude = Math.min(bbox.width * .4, bbox.height * 0.8);
-        this.origin.x = bbox.width / 2;
-        this.origin.y = bbox.height / 2 + this.magnitude / 2;
-
-        // Draw the protractor, create protrays based on the initial elements, and add them to the SVG.
+        // Rerender the compass and tickmarks
         this.renderCompass();
-        this.redrawLabels();
 
-        this.protRays.forEach(function (item) { item.setPoint(item.bd); })
+        //Rerender the rays
+        Object.values(this.interactivePoints).forEach(function(value) {
+            value.rerenderProtray()
+        });
+        Object.values(this.basePoints).forEach(function(value) {
+            value.rerenderProtray()
+        });
 
-
-        //TODO finish render method.
-
-
-
-        // Set snapping points in case snaps are turned on.
+        // Reset snapping points in case snaps are turned on.
+        this.snaps = [];
         this.setSnaps();
+        this.radsnaps = [];
+        this.setRadSnaps();
 
-
-        // console.log("CTAT Protractor object on next line"); //DBG final protractor object
-        // console.log(this);
-
-        this.setComponent(div);
-        this.setFontSize();
-
-
-        // finish any initialization here.
-        this.setInitialized(true);
-        this.addComponentReference(this, div);
-        //compass
-
-
-        //labels
-
-
-        //ticks
-
-
-        //rays
+        this.redrawLabels();
     }
-
 
     /*************** Compass Setup ***************/
     /**
@@ -905,6 +967,15 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         }
     }
 
+    this.deleteTicks = function () {
+        ticks = this._compass.children;
+        length = ticks.length;
+
+        for (i = length - 1; i >= 1; i--) {
+            ticks[i].remove();
+        }
+    }
+
     this.drawCompass = function () {
         compass = document.createElementNS(svgNS, "path");
         compass.setAttributeNS(null, 'd', "M " + this.origin.x + " " + this.origin.y +
@@ -916,10 +987,14 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
     }
 
     this.renderCompass = function() {
+        this.deleteTicks();
+
         this._compass.firstElementChild.setAttributeNS(null, 'd', "M " + this.origin.x + " " + this.origin.y +
         "H " + (this.origin.x + this.magnitude) +
         " A " + this.magnitude + " " + this.magnitude + " 0 0 0 " + (this.origin.x - this.magnitude) + " " + this.origin.y +
         " H " + this.origin.x);
+        
+        this.createTicks();
     }
 
     /*************** Label Setup ***************/
@@ -935,7 +1010,7 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
 
     this.setFontSize = function () {
         // min font size of 6, scale up as magnitude increases.
-        var fontSize = 6 + this.magnitude * .04;
+        var fontSize = 7 + this.magnitude * .04;
         this.component.style.fontSize = fontSize + "px";
     }
 
@@ -954,9 +1029,9 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         this._labels.appendChild(label);
     }
 
-    this.drawLabelB = function () {
+    this.drawOriginLabel = function () {
         // This is the label for the origin point; different from all the other labeling of the compass.
-        this.createLabel(this.origin.x, this.origin.y + this.magnitude * .1, 'B', 'CTATProtractor--labelB');
+        this.createLabel(this.origin.x, this.origin.y + this.magnitude * .07, this.baseOrigin, 'CTATProtractor--label-origin');
     }
 
     this.drawLabels = function () {
@@ -981,22 +1056,13 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
     this.redrawLabels = function () {
         this.deleteLabels();
         this.drawLabels();
-        this.drawLabelB();
+        this.drawOriginLabel();
     }
 
     this.lookupRadians = function (degree) {
         // Provides the radian strings for radian labels.  Could also be used if we wanted text inputs in radians.
-        // reduce() source: https://stackoverflow.com/questions/4652468/is-there-a-javascript-function-that-reduces-a-fraction
-        // I really should know this.
-        function reduce(numerator, denominator) {
-            var gcd = function gcd(a, b) {
-                return b ? gcd(b, a % b) : a;
-            };
-            gcd = gcd(numerator, denominator);
-            return [numerator / gcd, denominator / gcd];
-        }
 
-        var fraction = reduce(degree, 180);
+        fraction = this.reduceDegreesToFrac(degree);
         var numerator = fraction[0];
 
         if (fraction[0] === 0) {
@@ -1010,7 +1076,6 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         }
 
         return numerator + "π/" + fraction[1];
-
     }
 
     //TODO should come up with and set a standard magnitude multiplier based on radian code, and an offset multiplier based on
@@ -1205,6 +1270,53 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         return coord;
     }
 
+    this.convertUnits = function(degree_val) {
+        var converted_val = degree_val;
+        
+        if(this.measureunit.includes("rad")) {
+            converted_val = (degree_val*Math.PI/180).toFixed(this.precision);
+        } else if (this.measureunit.includes("frac")) {
+            if(this.denominator) {
+                numerator = Math.round((degree_val*Math.PI/180)*this.denominator);
+                converted_val = numerator + "/"+this.denominator;
+            } else {
+                frac = this.reduceDegreesToFrac(degree_val);
+                converted_val = frac[0]+"/"+frac[1];
+            }
+        }
+
+        return converted_val;
+    }
+
+    this.convertToDegrees = function(nondeg_val) {
+        
+        if(this.measureunit.includes("rad")) {
+            converted_val = Math.round(nondeg_val.toInt()*180/Math.PI);
+        } else if (this.measureunit.includes("frac")) {
+            frac_index = nondeg_val.search("/");
+            temp_numerator = nondeg_val.slice(0,frac_index).toInt();
+            temp_denom = nondeg_val.slice(frac_index+1).toInt();
+            converted_val = Math.round((temp_numerator/temp_denom)*180/Math.PI);
+        }
+
+        return converted_val;
+    }
+
+    this.reduceDegreesToFrac = function (degree) {
+        // Provides the radian fraction as an object with numerator = [0], denom = [1]
+        // reduce() source: https://stackoverflow.com/questions/4652468/is-there-a-javascript-function-that-reduces-a-fraction
+        // I really should know this.
+        function reduce(numerator, denominator) {
+            var gcd = function gcd(a, b) {
+                return b ? gcd(b, a % b) : a;
+            };
+            gcd = gcd(numerator, denominator);
+            return [numerator / gcd, denominator / gcd];
+        }
+
+        return reduce(degree, 180);
+    }
+
     /* Snapping helpers for when snapping is turned on */
 
     this.setSnaps = function () {
@@ -1213,16 +1325,43 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         }
     }
 
-    this.getClosestSnap = function (coord) {
-        var curAngle = this.calcAngle(coord);
-        var index = this.snaps.findIndex(function (currentValue) {
-            if (curAngle <= currentValue) {
-                return true;
-            }
-        });
+    this.setRadSnaps = function () {
+        for (i = 0; i <= 180; i += this.interval/4) {
+            this.radsnaps.push(i);
+        }
+    }
 
-        var botSnap = this.snaps[index - 1];
-        var topSnap = this.snaps[index];
+    this.getClosestSnap = function (coord, rad = false) {
+        // rad parameter lets you use the radian snapping function, which is like normal snapping with 4 subdivisions
+        // between every tick mark.
+        var curAngle = this.calcAngle(coord);
+        var index;
+
+        if(rad) {
+            index = this.radsnaps.findIndex(function (currentValue) {
+                if (curAngle <= currentValue) {
+                    return true;
+                }
+            });
+        } else {
+            index = this.snaps.findIndex(function (currentValue) {
+                if (curAngle <= currentValue) {
+                    return true;
+                }
+            });
+        }
+
+        var botSnap;
+        var topSnap;
+
+        if(rad) {
+            botSnap = this.radsnaps[index - 1];
+            topSnap = this.radsnaps[index];
+        } else {
+            botSnap = this.snaps[index - 1];
+            topSnap = this.snaps[index];
+        }
+        
 
         if ((topSnap - curAngle) >= (curAngle - botSnap)) {
             return this.getPointFromAnglitude(botSnap, this.magnitude);
@@ -1231,6 +1370,63 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         }
 
     }
+
+    /*************** Ray/Point Control ***************/
+    /**
+    * Methods that allow for user hiding, showing, locking, and unlocking groups of points.
+    */
+
+
+    this.lockPoints = function (points_list) {
+        Object.values(this.interactivePoints).forEach(function(value) {
+            if(points_list.includes(value.name)) {
+                value.deactivateProtRay();
+            } else {
+                value.reactivateProtRay();
+            }
+        });
+    }
+
+    this.unlockPoints = function (points_list) {
+        Object.values(this.interactivePoints).forEach(function(value) {
+            if(points_list.includes(value.name)) {
+                value.reactivateProtRay();
+            }
+        });
+    }
+
+    this.hidePoints = function (points_list) {
+        Object.values(this.interactivePoints).forEach(function(value) {
+            if(points_list.includes(value.name) && !value.hidden) {
+                value.hideProtRay();
+            }
+        });
+    }
+
+    this.showPoints = function (points_list) {
+        Object.values(this.interactivePoints).forEach(function(value) {
+            if(points_list.includes(value.name) && value.hidden) {
+                value.showProtRay();
+            }
+        });
+    }
+
+    this.fadeOutPoints = function (points_list) {
+        Object.values(this.interactivePoints).forEach(function(value) {
+            if(points_list.includes(value.name) && !value.hidden) {
+                value.fadeOutProtRay();
+            }
+        });
+    }
+
+    this.fadeInPoints = function (points_list) {
+        Object.values(this.interactivePoints).forEach(function(value) {
+            if(points_list.includes(value.name) && value.hidden) {
+                value.fadeInProtRay();
+            }
+        });
+    }
+
 
     /*************** Correct/Incorrect Highlighting ***************/
     /**
@@ -1245,19 +1441,17 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         var selectedProtRay;
 
         switch (action) {
-            case "SpecifiedAngleSet":
-                //If only a number is passed, it will move angle ABC only.
-                if (!isNaN(parseInt(inp))) {
-                    showcorrect_angle = parseInt(inp);
-                    selectedProtRay = this.protRays[0];
-                    baseray = this.protRays[1];
+            case "setAngle":
 
+                if(this.chosen) {
+                    selectedProtRay = this.findProtray(this.chosenAngle.charAt(0));
+                    baseray = this.findProtray(this.chosenAngle.charAt(2));
                 } else {
-                    showcorrect_angles = JSON.parse(inp);
+                    showcorrect_angles = JSON.parse("{"+inp+"}");
                     selectedProtRay = this.findProtray(Object.keys(showcorrect_angles)[0][0]);
                     baseray = this.findProtray(Object.keys(showcorrect_angles)[0][2]);
-                }
 
+                }
                 selectedProtRay.styleCorrect();
                 baseray.styleCorrect();
                 break;
@@ -1269,23 +1463,17 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
     this.showInCorrect = function (aSAI) {
         var inp = aSAI.getInput();
         var action = aSAI.getAction();
-        var baseray;
         var selectedProtRay;
 
         switch (action) {
-            case "SpecifiedAngleSet":
-                //If only a number is passed, it will move angle ABC only.
-                if (!isNaN(parseInt(inp))) {
-                    showincorrect_angle = parseInt(inp);
-                    selectedProtRay = this.protRays[0];
-                    baseray = this.protRays[1];
+            case "setAngle":
 
+                if(this.chosen) {
+                    selectedProtRay = this.findProtray(this.chosenAngle.charAt(0));
                 } else {
-                    showincorrect_angles = JSON.parse(inp);
+                    showincorrect_angles = JSON.parse("{"+inp+"}");
                     selectedProtRay = this.findProtray(Object.keys(showincorrect_angles)[0][0]);
-                    baseray = this.findProtray(Object.keys(showincorrect_angles)[0][2]);
                 }
-
                 selectedProtRay.styleIncorrect();
                 break;
             default: console.log("Incorrect highlight's broke son."); break;
@@ -1302,16 +1490,13 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         var selectedProtRay;
 
         switch (action) {
-            case "SpecifiedAngleSet":
+            case "setAngle":
                 //If only a number is passed, it will assume angle ABC.
-                if (!isNaN(parseInt(inp))) {
-                    showhint_angle = parseInt(inp);
-                    selectedProtRay = this.protRays[0];
-                    baseray = this.protRays[1];
-
+                if(this.chosen) {
+                    selectedProtRay = this.findProtray(this.chosenAngle.charAt(0));
+                    baseray = this.findProtray(this.chosenAngle.charAt(2));
                 } else {
-                    showhint_angles = JSON.parse(inp);
-
+                    showhint_angles = JSON.parse("{"+inp+"}");
                     selectedProtRay = this.findProtray(Object.keys(showhint_angles)[0][0]);
                     baseray = this.findProtray(Object.keys(showhint_angles)[0][2]);
                 }
@@ -1324,8 +1509,6 @@ var CTATProtractor = function (aDescription, aX, aY, aWidth, aHeight) {
         }
 
     }
-
-
 
 };
 
