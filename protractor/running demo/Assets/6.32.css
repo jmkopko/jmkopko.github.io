@@ -1,0 +1,11 @@
+#angles {
+  align-self: center;
+}
+
+.CTATProblemSolving {
+  flex-direction: column;
+}
+
+.spacer {
+  margin-top: 20px;
+}
